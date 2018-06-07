@@ -7,6 +7,10 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Parsing", "Sokoba
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Parsing.Tests", "SokobanFS.Parsing.Tests\SokobanFS.Parsing.Tests.fsproj", "{D76D1555-C331-4159-B5AF-766F0D34B2B0}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Game", "SokobanFS.Game\SokobanFS.Game.fsproj", "{158D4A93-F897-4607-A4D9-D2731F623C9C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Game.Tests", "SokobanFS.Game.Tests\SokobanFS.Game.Tests.fsproj", "{522C1011-9C8F-4B1B-98B1-B1660B5EA347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D76D1555-C331-4159-B5AF-766F0D34B2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D76D1555-C331-4159-B5AF-766F0D34B2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D76D1555-C331-4159-B5AF-766F0D34B2B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158D4A93-F897-4607-A4D9-D2731F623C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158D4A93-F897-4607-A4D9-D2731F623C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158D4A93-F897-4607-A4D9-D2731F623C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158D4A93-F897-4607-A4D9-D2731F623C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

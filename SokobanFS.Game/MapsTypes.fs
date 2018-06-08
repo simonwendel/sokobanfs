@@ -1,4 +1,4 @@
-(*
+﻿(*
  * SokobanFS - A Sokoban clone.
  * Copyright (C) 2018  Simon Wendel
  *
@@ -16,4 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Parsing
+namespace SokobanFS.Game
+
+module MapsTypes =
+
+    type Tile =
+        | Wall
+        | Player
+        | PlayerOnGoal
+        | Box
+        | BoxOnGoal
+        | Goal
+        | Floor
+        | Empty

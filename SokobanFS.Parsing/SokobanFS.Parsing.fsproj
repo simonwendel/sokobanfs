@@ -6,7 +6,11 @@
 
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Library.fs" />
+    <Compile Include="Convert.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SokobanFS.Game\SokobanFS.Game.fsproj" />
   </ItemGroup>
 
 </Project>

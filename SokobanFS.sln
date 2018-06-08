@@ -7,9 +7,13 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Parsing", "Sokoba
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Parsing.Tests", "SokobanFS.Parsing.Tests\SokobanFS.Parsing.Tests.fsproj", "{D76D1555-C331-4159-B5AF-766F0D34B2B0}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Game", "SokobanFS.Game\SokobanFS.Game.fsproj", "{158D4A93-F897-4607-A4D9-D2731F623C9C}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Game", "SokobanFS.Game\SokobanFS.Game.fsproj", "{158D4A93-F897-4607-A4D9-D2731F623C9C}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Game.Tests", "SokobanFS.Game.Tests\SokobanFS.Game.Tests.fsproj", "{522C1011-9C8F-4B1B-98B1-B1660B5EA347}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SokobanFS.Game.Tests", "SokobanFS.Game.Tests\SokobanFS.Game.Tests.fsproj", "{522C1011-9C8F-4B1B-98B1-B1660B5EA347}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Lib", "SokobanFS.Lib\SokobanFS.Lib.fsproj", "{E80ED73B-9708-46A8-97BA-2C8F85BB87EF}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SokobanFS.Lib.Tests", "SokobanFS.Lib.Tests\SokobanFS.Lib.Tests.fsproj", "{7F4B3395-5236-4050-BE0E-95692A1D90F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522C1011-9C8F-4B1B-98B1-B1660B5EA347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80ED73B-9708-46A8-97BA-2C8F85BB87EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80ED73B-9708-46A8-97BA-2C8F85BB87EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80ED73B-9708-46A8-97BA-2C8F85BB87EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80ED73B-9708-46A8-97BA-2C8F85BB87EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4B3395-5236-4050-BE0E-95692A1D90F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4B3395-5236-4050-BE0E-95692A1D90F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4B3395-5236-4050-BE0E-95692A1D90F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4B3395-5236-4050-BE0E-95692A1D90F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

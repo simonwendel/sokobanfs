@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Collection2DTypes.fs" />
+    <Compile Include="Collection2D.fs" />
     <Compile Include="AssemblyInfo.fs" />
   </ItemGroup>
 

@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Lib
 
-module Collection =
+module Sequence =
 
     module private HigherOrder =
 

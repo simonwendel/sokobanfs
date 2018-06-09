@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Lib
 
-module Collection2DTypes =
+module Sequence2DTypes =
 
     type Dimensions =
         | Dimensions2D of int * int

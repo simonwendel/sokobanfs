@@ -16,19 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Lib.Tests.Collection2D
+namespace SokobanFS.Lib.Tests.Sequence2D
 
-module sizeOfJagged =
+module toArray2D =
     
     open FsCheck
     open FsUnit
     open Xunit
 
     open SokobanFS.Lib
-    open SokobanFS.Lib.Collection2DTypes
     
     [<Fact>]
-    let ``Given integer list list, computes min 2D array size that would hold the jagged collection`` () = 
+    let ``Given integer list list and padding element, returns Array2D representation`` () = 
         
         let jaggedCollectionOfInts = 
             [[ 1; 2; 3 ]; 
@@ -36,11 +35,19 @@ module sizeOfJagged =
              [ 1; 2; 3 ]; 
              [ 1; 2; 3; 4 ]; 
              [ 1; 2; 3 ]]
-        
-        jaggedCollectionOfInts |> Collection2D.sizeOfJagged |> should equal (Dimensions2D (4, 5))
+
+        let expectedArray = 
+            array2D 
+                [| [| 1; 2; 3; 9 |]; 
+                   [| 1; 2; 9; 9 |]; 
+                   [| 1; 2; 3; 9 |]; 
+                   [| 1; 2; 3; 4 |]; 
+                   [| 1; 2; 3; 9 |] |]
+
+        jaggedCollectionOfInts |> Sequence2D.toArray2D 9 |> should equal expectedArray
  
     [<Fact>]
-    let ``Given string array array, computes min 2D array size that would hold the jagged collection`` () = 
+    let ``Given string array array and padding element, returns Array2D representation`` () = 
 
          let jaggedCollectionOfStrings =
             [| [| "1"; "2"; "3"; "4" |]; 
@@ -49,5 +56,15 @@ module sizeOfJagged =
                [| "1"; "2" |]; 
                [| "1"; "2"; "3" |];
                [| "1"; "2"; "3" |] |]
+
+         let expectedArray =
+            array2D  
+                [| [| "1"; "2"; "3"; "4"; "9" |]; 
+                   [| "1"; "2"; "3"; "4"; "5" |]; 
+                   [| "1"; "2"; "3"; "9"; "9" |]; 
+                   [| "1"; "2"; "9"; "9"; "9" |]; 
+                   [| "1"; "2"; "3"; "9"; "9" |];
+                   [| "1"; "2"; "3"; "9"; "9" |] |]
         
-         jaggedCollectionOfStrings |> Collection2D.sizeOfJagged |> should equal (Dimensions2D (5, 6))
+         jaggedCollectionOfStrings |> Sequence2D.toArray2D "9" |> should equal expectedArray
+

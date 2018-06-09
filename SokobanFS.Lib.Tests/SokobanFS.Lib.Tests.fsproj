@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Collection\trimReplace.fs" />
-    <Compile Include="Collection2D\toArray2D.fs" />
-    <Compile Include="Collection2D\sizeOfJagged.fs" />
+    <Compile Include="Sequence\trimReplace.fs" />
+    <Compile Include="Sequence2D\toArray2D.fs" />
+    <Compile Include="Sequence2D\sizeOfJagged.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

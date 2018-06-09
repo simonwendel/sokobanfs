@@ -18,9 +18,9 @@
 
 namespace SokobanFS.Lib
 
-module Collection2D =
+module Sequence2D =
 
-    open Collection2DTypes
+    open Sequence2DTypes
 
     /// <summary>
     /// Calculates dimensions of the smallest possible 2D array that could hold the 

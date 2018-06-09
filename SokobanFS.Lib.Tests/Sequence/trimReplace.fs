@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Lib.Tests.Collection
+namespace SokobanFS.Lib.Tests.Sequence
 
 module trimReplace = 
   
@@ -37,7 +37,7 @@ module trimReplace =
             let expectation = 
                 [ 9; 9; 9; 2; 1; 2; 3; 9 ];
 
-            input |> Collection.List.trimReplace 1 9 |> should equal expectation
+            input |> Sequence.List.trimReplace 1 9 |> should equal expectation
  
     module Array =
 
@@ -50,4 +50,4 @@ module trimReplace =
             let expectation = 
                 [| "9"; "9"; "9"; "2"; "1"; "2"; "3"; "9" |];
 
-            input |> Collection.Array.trimReplace "1" "9"  |> should equal expectation
+            input |> Sequence.Array.trimReplace "1" "9"  |> should equal expectation

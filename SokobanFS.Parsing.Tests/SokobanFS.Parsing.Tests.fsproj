@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Convert\toBoard.fs" />
     <Compile Include="Convert\toTile.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SokobanFS.Lib\SokobanFS.Lib.fsproj" />
     <ProjectReference Include="..\SokobanFS.Parsing\SokobanFS.Parsing.fsproj" />
   </ItemGroup>
 

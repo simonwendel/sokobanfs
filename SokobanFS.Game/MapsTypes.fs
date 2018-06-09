@@ -29,3 +29,6 @@ module MapsTypes =
         | Goal
         | Floor
         | Empty
+
+    type Board =
+        | Board of Tile[,]

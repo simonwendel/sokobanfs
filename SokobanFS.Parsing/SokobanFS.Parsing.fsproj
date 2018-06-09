@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SokobanFS.Game\SokobanFS.Game.fsproj" />
+    <ProjectReference Include="..\SokobanFS.Lib\SokobanFS.Lib.fsproj" />
   </ItemGroup>
 
 </Project>

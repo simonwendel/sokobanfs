@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Parsing.Tests.Convert
+namespace SokobanFS.Game.Tests.Parse
 
 module toTile =
     
@@ -24,8 +24,8 @@ module toTile =
     open FsUnit
     open Xunit
     
+    open SokobanFS.Game
     open SokobanFS.Game.MapsTypes
-    open SokobanFS.Parsing
     
     [<Fact>]
     let ``Converting known level format character produces corresponding tile`` () = 
@@ -40,11 +40,11 @@ module toTile =
               ' ', Floor;]
             |> Map.ofList
         
-        knownMappings |> Map.iter (fun character tile -> Convert.toTile character |> should equal tile)
+        knownMappings |> Map.iter (fun character tile -> Parse.toTile character |> should equal tile)
 
     [<Property>]
     let ``Converting unknown level format character produces Empty tile`` (character:char) =
 
         let validTileCharacters = [ '#'; '@'; '+'; '$'; '*'; '.'; ' ' ]
         
-        not (validTileCharacters |> List.contains character) ==> (Convert.toTile character = Empty)
+        not (validTileCharacters |> List.contains character) ==> (Parse.toTile character = Empty)

@@ -16,17 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Parsing.Tests.Convert
+namespace SokobanFS.Game.Tests.Parse
 
 module toBoard =
-    
-    open FsCheck
+
     open FsUnit
     open Xunit
 
+    open SokobanFS.Game
     open SokobanFS.Game.MapsTypes
     open SokobanFS.Lib
-    open SokobanFS.Parsing
     
     [<Fact>]
     let ``Given known level format, produces valid board`` () = 
@@ -49,7 +48,7 @@ module toBoard =
                   [ Wall; Floor; Goal; Floor; Goal; Wall; Player; Floor; Wall ];
                   [ Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall ] ]
 
-        input |> Convert.toBoard |> should equal expectation
+        input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the right, trims them off`` () =
@@ -63,7 +62,7 @@ module toBoard =
             [ [ Wall ]; 
               [ BoxOnGoal ] ]
 
-        input |> Convert.toBoard |> should equal expectation
+        input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the left, cleans them up with empty tiles`` () =
@@ -77,7 +76,7 @@ module toBoard =
             [ [ Empty; Empty; Wall ]; 
               [ Empty; Empty; BoxOnGoal ] ]
 
-        input |> Convert.toBoard |> should equal expectation
+        input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the top, cleans them up with empty tiles`` () =
@@ -91,7 +90,7 @@ module toBoard =
             [ [ BoxOnGoal; Empty; BoxOnGoal ]; 
               [ Wall; Wall; Wall ] ]
 
-        input |> Convert.toBoard |> should equal expectation
+        input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the bottom, cleans them up with empty tiles`` () =
@@ -105,4 +104,4 @@ module toBoard =
             [ [ Wall; Wall; Wall ];
               [ BoxOnGoal; Empty; BoxOnGoal ] ]
 
-        input |> Convert.toBoard |> should equal expectation
+        input |> Parse.toBoard |> should equal expectation

@@ -40,7 +40,7 @@ module Parse =
         let trimEndsOffEachRow (s : string) =  
             s.TrimEnd (' ')
 
-        let cleanColumnsTopToBottom arr =
+        let cleanColumnsTopAndBottom arr =
             for colNum = 0 to (Array2D.length2 arr) - 1 do
                 arr.[*,colNum] 
                 |> Sequence.Array.trimReplace Floor Empty
@@ -52,5 +52,5 @@ module Parse =
         |> Array.map trimEndsOffEachRow
         |> Array.map (Array.ofSeq >> Array.map toTile >> Sequence.Array.trimReplace Floor Empty)
         |> Sequence2D.toArray2D Tile.Empty
-        |> cleanColumnsTopToBottom
+        |> cleanColumnsTopAndBottom
         |> MapsTypes.Board

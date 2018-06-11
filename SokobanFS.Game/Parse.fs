@@ -23,7 +23,7 @@ module Parse =
     open MapsTypes
     open SokobanFS.Lib
 
-    let internal toTile character = 
+    let private toTile character = 
         
         match character with
         | '#' -> Wall

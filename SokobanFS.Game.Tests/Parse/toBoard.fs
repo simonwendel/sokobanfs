@@ -108,7 +108,7 @@ module toBoard =
         input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
-    let ``Converting known level format character produces corresponding tiles`` () = 
+    let ``Converting known level format character produces corresponding tile`` () = 
         
         // all known mappings, except for the Space -> (Floor or Empty)
         // that is implicitly handled in the other tests

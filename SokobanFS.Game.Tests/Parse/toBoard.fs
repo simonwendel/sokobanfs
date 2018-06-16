@@ -26,6 +26,7 @@ module toBoard =
 
     open SokobanFS.Game
     open SokobanFS.Game.MapsTypes
+    open SokobanFS.Game.ParseTypes
     open SokobanFS.Lib
 
     [<Fact>]
@@ -124,11 +125,11 @@ module toBoard =
         knownMappings |> Map.iter (fun input expectation -> Parse.toBoard input |> should equal (Board <| array2D expectation))
 
     [<Property>]
-    let ``Converting unknown level format character produces Empty tile`` (character : char) =
+    let ``Converting unknown level format character, throws InvalidFormat exception`` (character : char) =
 
         let validTileCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 
         let input = character.ToString()
-        let expectation = Board (array2D [[ Empty ]])
         
-        not (validTileCharacters |> List.contains input) ==> (Parse.toBoard [ input ] = expectation)
+        not (validTileCharacters |> List.contains input) ==> 
+            lazy (Assert.Throws<InvalidFormat> (fun () -> Parse.toBoard [ input ] |> ignore) |> ignore)

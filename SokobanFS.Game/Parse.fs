@@ -24,22 +24,29 @@ module Parse =
     
     open SokobanFS.Lib
     open MapsTypes
+    open ParseTypes
 
     type private CharacterQualifier =
         | Digit of int
         | Letter of char
 
+    let private mappings =
+        [ '#', Wall;
+          '@', Player;
+          '+', PlayerOnGoal;
+          '$', Box;
+          '*', BoxOnGoal;
+          '.', Goal;
+          ' ', Floor ]
+
+    let private tileLookup =
+        mappings |> Map.ofList
+
     let private toTile character = 
         
-        match character with
-        | '#' -> Wall
-        | '@' -> Player
-        | '+' -> PlayerOnGoal
-        | '$' -> Box
-        | '*' -> BoxOnGoal
-        | '.' -> Goal
-        | ' ' -> Floor
-        | _ -> Empty
+        match tileLookup.TryFind character with
+        | Some tile -> tile
+        | None -> raise (InvalidFormat "Invalid format")
 
     let internal toBoard rows =    
         
@@ -84,7 +91,7 @@ module Parse =
             | [] -> [""]
             | Letter (c) :: tail -> (c.ToString()) :: (expandCharacters tail)
             | (Digit (n)) :: (Letter (c)) :: tail -> (String.replicate n (c.ToString())) :: (expandCharacters tail)
-            | _ -> raise (ParseTypes.InvalidFormat "Invalid format")
+            | _ -> raise (InvalidFormat "Invalid format")
 
         str
             .Replace("-", " ")

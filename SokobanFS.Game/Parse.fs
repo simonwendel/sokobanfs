@@ -20,8 +20,14 @@ namespace SokobanFS.Game
 
 module Parse =
 
-    open MapsTypes
+    open System
+    
     open SokobanFS.Lib
+    open MapsTypes
+
+    type private CharacterQualifier =
+        | Digit of int
+        | Letter of char
 
     let private toTile character = 
         
@@ -54,3 +60,41 @@ module Parse =
         |> Sequence2D.toArray2D Tile.Empty
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board
+
+    let internal decodeRLE (str : string) =
+
+        let qualifyElements row = 
+            row 
+            |> List.map (fun character ->
+                match Int32.TryParse (character.ToString()) with
+                | (true, num) -> Digit (num)
+                | (false, _) -> Letter (character))
+
+        let sumUpNumbers state head =
+            match head with
+            | Letter (_) -> head :: state
+            | Digit n ->
+                match state with
+                | [] -> [head]
+                | Digit (h) :: tail -> Digit (n + 10 * h) :: tail
+                | Letter(_) :: _ -> Digit (n) :: state
+
+        let rec expandCharacters list = 
+            match list with 
+            | [] -> [""]
+            | Letter (c) :: tail -> (c.ToString()) :: (expandCharacters tail)
+            | (Digit (n)) :: (Letter (c)) :: tail -> (String.replicate n (c.ToString())) :: (expandCharacters tail)
+            | _ -> raise (ParseTypes.InvalidFormat "Invalid format")
+
+        str
+            .Replace("-", " ")
+            .Split('|')
+        |> List.ofSeq
+        |> List.map
+            (  List.ofSeq
+            >> qualifyElements
+            >> (List.fold sumUpNumbers [])
+            >> List.rev
+            >> expandCharacters
+            >> List.reduce (+))
+        |> toBoard

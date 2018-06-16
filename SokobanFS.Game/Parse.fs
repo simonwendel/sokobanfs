@@ -41,7 +41,7 @@ module Parse =
             s.TrimEnd (' ')
 
         let cleanColumnsTopAndBottom arr =
-            for colNum = 0 to (Array2D.length2 arr) - 1 do
+            for colNum = 0 to Array2D.length2 arr - 1 do
                 arr.[*,colNum] 
                 |> Sequence.Array.trimReplace Floor Empty
                 |> Array.iteri (fun rowNum value -> arr.[rowNum,colNum] <- value)

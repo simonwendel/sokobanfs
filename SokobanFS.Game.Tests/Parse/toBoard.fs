@@ -124,7 +124,7 @@ module toBoard =
         knownMappings |> Map.iter (fun input expectation -> Parse.toBoard input |> should equal (Board <| array2D expectation))
 
     [<Property>]
-    let ``Converting unknown level format character produces Empty tile`` (character:char) =
+    let ``Converting unknown level format character produces Empty tile`` (character : char) =
 
         let validTileCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 

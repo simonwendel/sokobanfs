@@ -26,9 +26,9 @@ module Parse =
     open MapsTypes
     open ParseTypes
 
-    type private CharacterQualifier =
-        | Digit of int
-        | Letter of char
+    type private Token =
+        | Number of int
+        | Character of char
 
     let private mappings =
         [ '#', Wall;
@@ -46,7 +46,7 @@ module Parse =
         
         match tileLookup.TryFind character with
         | Some tile -> tile
-        | None -> raise (InvalidFormat "Invalid format")
+        | None -> raise (IllegalFormatException "Invalid format")
 
     let internal toBoard rows =    
         
@@ -68,40 +68,41 @@ module Parse =
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board
 
-    let internal decodeRLE (str : string) =
+    let internal decodeRLE (input : string) =
 
-        let qualifyElements row = 
-            row 
-            |> List.map (fun character ->
-                match Int32.TryParse (character.ToString()) with
-                | (true, num) -> Digit (num)
-                | (false, _) -> Letter (character))
+        let split (separator : char) (str : string) = 
+            str.Split(separator)
 
-        let sumUpNumbers state head =
-            match head with
-            | Letter (_) -> head :: state
-            | Digit n ->
-                match state with
-                | [] -> [head]
-                | Digit (h) :: tail -> Digit (n + 10 * h) :: tail
-                | Letter(_) :: _ -> Digit (n) :: state
+        let replace (find : char) (replacement : char) (str : string) = 
+            str.Replace(find, replacement)
+
+        let toCharListList = 
+            (List.ofArray >> List.map List.ofSeq)
+
+        let rec qualifyCharacters list = 
+            match list with 
+            | [] -> []
+            | head :: tail ->
+                match Int32.TryParse(head.ToString()) with
+                | (true, num) -> Number (num) :: qualifyCharacters tail
+                | (false, _) -> Character (head) :: qualifyCharacters tail
+
+        let rec sumUpNumbers list =
+            match list with
+            | [] -> []
+            | Number (major) :: Number (minor) :: tail -> sumUpNumbers (Number (10 * major + minor) :: tail)
+            | otherToken :: tail -> otherToken :: sumUpNumbers tail
 
         let rec expandCharacters list = 
             match list with 
             | [] -> [""]
-            | Letter (c) :: tail -> (c.ToString()) :: (expandCharacters tail)
-            | (Digit (n)) :: (Letter (c)) :: tail -> (String.replicate n (c.ToString())) :: (expandCharacters tail)
-            | _ -> raise (InvalidFormat "Invalid format")
-
-        str
-            .Replace("-", " ")
-            .Split('|')
-        |> List.ofSeq
-        |> List.map
-            (  List.ofSeq
-            >> qualifyElements
-            >> (List.fold sumUpNumbers [])
-            >> List.rev
-            >> expandCharacters
-            >> List.reduce (+))
+            | Number (numberOfTimes) :: Character (character) :: tail -> (String.replicate numberOfTimes (character.ToString())) :: expandCharacters tail
+            | Character (character) :: tail -> character.ToString() :: expandCharacters tail
+            | illegal -> raise (IllegalFormatException (illegal.ToString()))
+        
+        input 
+        |> replace '-' ' ' 
+        |> split '|'
+        |> toCharListList
+        |> List.map (qualifyCharacters >> sumUpNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard

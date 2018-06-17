@@ -20,4 +20,4 @@ namespace SokobanFS.Game
 
 module ParseTypes =
 
-    exception InvalidFormat of string
+    exception IllegalFormatException of string

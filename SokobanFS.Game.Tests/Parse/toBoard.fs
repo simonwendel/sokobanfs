@@ -132,4 +132,4 @@ module toBoard =
         let input = character.ToString()
         
         not (validTileCharacters |> List.contains input) ==> 
-            lazy (Assert.Throws<InvalidFormat> (fun () -> Parse.toBoard [ input ] |> ignore) |> ignore)
+            lazy (Assert.Throws<IllegalFormatException> (fun () -> Parse.toBoard [ input ] |> ignore) |> ignore)

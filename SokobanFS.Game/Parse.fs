@@ -63,7 +63,9 @@ module Parse =
         rows
         |> Array.ofSeq
         |> Array.map trimEndsOffEachRow
-        |> Array.map (Array.ofSeq >> Array.map toTile >> Sequence.Array.trimReplace Floor Empty)
+        |> Array.map (  Array.ofSeq 
+                     >> Array.map toTile 
+                     >> Sequence.Array.trimReplace Floor Empty )
         |> Sequence2D.toArray2D Tile.Empty
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board

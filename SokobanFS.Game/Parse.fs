@@ -89,11 +89,11 @@ module Parse =
                 | (true, num) -> Number (num) :: qualifyCharacters tail
                 | (false, _) -> Character (head) :: qualifyCharacters tail
 
-        let rec sumUpNumbers list =
+        let rec joinNumbers list =
             match list with
             | [] -> []
-            | Number (major) :: Number (minor) :: tail -> sumUpNumbers (Number (10 * major + minor) :: tail)
-            | otherToken :: tail -> otherToken :: sumUpNumbers tail
+            | Number (major) :: Number (minor) :: tail -> joinNumbers (Number (10 * major + minor) :: tail)
+            | otherToken :: tail -> otherToken :: joinNumbers tail
 
         let rec expandCharacters list = 
             match list with 
@@ -106,5 +106,5 @@ module Parse =
         |> replace '-' ' ' 
         |> split '|'
         |> toCharListList
-        |> List.map (qualifyCharacters >> sumUpNumbers >> expandCharacters >> List.reduce (+))
+        |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard

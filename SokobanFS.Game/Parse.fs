@@ -42,17 +42,38 @@ module Parse =
     let private tileLookup =
         mappings |> Map.ofList
 
+    let private characterLookup =
+        Map.ofList ((Empty, ' ') :: (List.map Tuple.swap mappings))
+
     let private toTile character = 
         
         match tileLookup.TryFind character with
         | Some tile -> tile
         | None -> raise (InvalidFormatException "Invalid format")
 
+    let private toChar tile = characterLookup.[tile]
+    
+    let private split (separator : char) (str : string) = 
+        str.Split(separator)
+
+    let private replace (find : char) (replacement : char) (str : string) = 
+        str.Replace(find, replacement)
+    
+    let private toString list = 
+        list |> List.map (fun c -> c.ToString()) |> List.reduce (+) 
+    
+    let private trimEnd (s : string) =  
+        s.TrimEnd (' ')
+
+    let private toChars = List.ofSeq
+
+    let rec private toArrayList array =
+        match Array2D.length1 array with
+        | 0 -> []
+        | _ -> List.ofArray array.[0,*] :: toArrayList array.[1..,*]
+
     let internal toBoard rows =    
         
-        let trimEndsOffEachRow (s : string) =  
-            s.TrimEnd (' ')
-
         let cleanColumnsTopAndBottom arr =
             for colNum = 0 to Array2D.length2 arr - 1 do
                 arr.[*,colNum] 
@@ -62,7 +83,7 @@ module Parse =
 
         rows
         |> Array.ofSeq
-        |> Array.map (  trimEndsOffEachRow
+        |> Array.map (  trimEnd
                      >> Array.ofSeq 
                      >> Array.map toTile 
                      >> Sequence.Array.trimReplace Floor Empty )
@@ -70,24 +91,18 @@ module Parse =
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board
 
+    let rec private qualifyCharacters list = 
+        match list with 
+        | [] -> []
+        | head :: tail ->
+            match Int32.TryParse(head.ToString()) with
+            | (true, num) -> Number (num) :: qualifyCharacters tail
+            | (false, _) -> Character (head) :: qualifyCharacters tail
+    
     let internal decodeRLE (input : string) =
-
-        let split (separator : char) (str : string) = 
-            str.Split(separator)
-
-        let replace (find : char) (replacement : char) (str : string) = 
-            str.Replace(find, replacement)
 
         let toCharListList = 
             (List.ofArray >> List.map List.ofSeq)
-
-        let rec qualifyCharacters list = 
-            match list with 
-            | [] -> []
-            | head :: tail ->
-                match Int32.TryParse(head.ToString()) with
-                | (true, num) -> Number (num) :: qualifyCharacters tail
-                | (false, _) -> Character (head) :: qualifyCharacters tail
 
         let rec joinNumbers list =
             match list with
@@ -108,3 +123,43 @@ module Parse =
         |> toCharListList
         |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard
+    
+    let encodeRLE board = 
+
+        let rec insertOnes list = 
+            match list with 
+            | [] -> []
+            | head :: tail -> Number (1) :: head :: insertOnes tail
+
+        let rec countRepetitions list = 
+            match list with 
+            | [] -> []
+            | Number (n1) :: Character (c1) :: Number (n2) :: Character (c2) :: tail -> 
+                if c1 = c2 then 
+                    // not very performant for extremely long repetitions... so what?
+                    countRepetitions (Number (n1 + n2) :: Character (c1) :: tail)
+                else
+                    Number (n1) :: Character (c1) :: countRepetitions (Number (n2) :: Character (c2) :: tail)
+            | q :: tail -> q :: countRepetitions tail
+
+        let rec stringifyTokens list =
+            match list with 
+            | [] -> []
+            | Number (n) :: Character (c) :: tail ->
+                let character = c.ToString()
+                let number = if n = 1 then "" else n.ToString()
+
+                if (n = 2) then
+                    character :: character :: stringifyTokens tail
+                else
+                    number :: character :: stringifyTokens tail
+            | illegal -> raise (InvalidFormatException (illegal.ToString()))
+        
+        match board with
+        | Board board ->
+            board 
+            |> Array2D.map toChar
+            |> toArrayList 
+            |> List.map (toString >> trimEnd >> toChars >> qualifyCharacters >> insertOnes >> countRepetitions >> stringifyTokens >> toString)
+            |> String.concat "|"
+            |> replace ' ' '-' 

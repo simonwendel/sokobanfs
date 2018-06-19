@@ -78,4 +78,4 @@ module decodeRLE =
 
         let input = "$$|#100"
 
-        (fun () -> input |> Parse.decodeRLE |> ignore) |> should throw typeof<ParseTypes.IllegalFormatException>
+        (fun () -> input |> Parse.decodeRLE |> ignore) |> should throw typeof<ParseTypes.InvalidFormatException>

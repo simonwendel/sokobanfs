@@ -46,7 +46,7 @@ module Parse =
         
         match tileLookup.TryFind character with
         | Some tile -> tile
-        | None -> raise (IllegalFormatException "Invalid format")
+        | None -> raise (InvalidFormatException "Invalid format")
 
     let internal toBoard rows =    
         
@@ -100,7 +100,7 @@ module Parse =
             | [] -> [""]
             | Number (numberOfTimes) :: Character (character) :: tail -> (String.replicate numberOfTimes (character.ToString())) :: expandCharacters tail
             | Character (character) :: tail -> character.ToString() :: expandCharacters tail
-            | illegal -> raise (IllegalFormatException (illegal.ToString()))
+            | illegal -> raise (InvalidFormatException (illegal.ToString()))
         
         input 
         |> replace '-' ' ' 

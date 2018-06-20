@@ -16,15 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Lib
+namespace SokobanFS.Lib.Tests.String
 
-module String =
+module replace = 
 
-    let fromSeq seq = 
-        seq 
-        |> Seq.map (fun el -> el.ToString()) 
-        |> Seq.reduce (+)
+    open FsUnit
+    open Xunit
 
-    let splitOn (separator : char) (str : string) = str.Split(separator)
+    open SokobanFS.Lib
 
-    let replace (find : char) (replacement : char) (str : string) = str.Replace(find, replacement)
+    [<Fact>]
+    let ``Given string, character and replacement, replaces character with replacement`` () =
+
+        let input = "string+with+some+separation+by+chars"
+
+        let expected = "string-with-some-separation-by-chars"
+
+        input |> String.replace '+' '-' |> should equal expected

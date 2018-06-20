@@ -54,9 +54,6 @@ module Parse =
 
     let private toChar tile = characterLookup.[tile]
 
-    let private replace (find : char) (replacement : char) (str : string) = 
-        str.Replace(find, replacement)
-    
     let private trimEnd (s : string) =  
         s.TrimEnd (' ')
 

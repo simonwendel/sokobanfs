@@ -11,6 +11,7 @@
     <Compile Include="Sequence\trimReplace.fs" />
     <Compile Include="Sequence2D\toArray2D.fs" />
     <Compile Include="Sequence2D\sizeOfJagged.fs" />
+    <Compile Include="String\replace.fs" />
     <Compile Include="String\fromSeq.fs" />
     <Compile Include="String\splitOn.fs" />
     <Compile Include="Tuple\swap.fs" />

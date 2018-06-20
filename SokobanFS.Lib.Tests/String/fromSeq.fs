@@ -16,13 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SokobanFS.Lib
+namespace SokobanFS.Lib.Tests.String
 
-module String =
+module fromSeq = 
 
-    let fromSeq seq = 
-        seq 
-        |> Seq.map (fun el -> el.ToString()) 
-        |> Seq.reduce (+)
+    open FsUnit
+    open Xunit
 
-    let splitOn (separator : char) (str : string) = str.Split(separator)
+    open SokobanFS.Lib
+
+    [<Fact>]
+    let ``Given int list, creates string from elements`` () =
+
+        let input = [ 1; 2; 3; ]
+
+        let expected = "123"
+
+        input |> String.fromSeq |> should equal expected
+
+    [<Fact>]
+    let ``Given string array, creates string from elements`` () =
+
+        let input = [ "1"; "2"; "3"; ]
+
+        let expected = "123"
+
+        input |> String.fromSeq |> should equal expected

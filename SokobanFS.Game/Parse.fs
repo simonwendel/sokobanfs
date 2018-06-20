@@ -57,9 +57,6 @@ module Parse =
     let private replace (find : char) (replacement : char) (str : string) = 
         str.Replace(find, replacement)
     
-    let private toString list = 
-        list |> List.map (fun c -> c.ToString()) |> List.reduce (+) 
-    
     let private trimEnd (s : string) =  
         s.TrimEnd (' ')
 
@@ -158,6 +155,6 @@ module Parse =
             board 
             |> Array2D.map toChar
             |> toArrayList 
-            |> List.map (toString >> trimEnd >> toChars >> qualifyCharacters >> insertOnes >> countRepetitions >> stringifyTokens >> toString)
+            |> List.map (String.fromSeq >> trimEnd >> toChars >> qualifyCharacters >> insertOnes >> countRepetitions >> stringifyTokens >> String.fromSeq)
             |> String.concat "|"
             |> replace ' ' '-' 

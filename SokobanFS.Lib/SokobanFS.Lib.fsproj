@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="String.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Sequence.fs" />
     <Compile Include="Sequence2DTypes.fs" />
     <Compile Include="Sequence2D.fs" />
+    <Compile Include="String.fs" />
     <Compile Include="Tuple.fs" />
   </ItemGroup>
 

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="String.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Sequence.fs" />
     <Compile Include="Sequence2DTypes.fs" />

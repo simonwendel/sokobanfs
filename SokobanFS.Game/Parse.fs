@@ -21,10 +21,11 @@ namespace SokobanFS.Game
 module Parse =
 
     open System
-    
-    open SokobanFS.Lib
+
     open MapsTypes
     open ParseTypes
+    open SokobanFS.Lib
+    open SokobanFS.Lib.String
 
     type private Token =
         | Number of int
@@ -52,9 +53,6 @@ module Parse =
         | None -> raise (InvalidFormatException "Invalid format")
 
     let private toChar tile = characterLookup.[tile]
-    
-    let private split (separator : char) (str : string) = 
-        str.Split(separator)
 
     let private replace (find : char) (replacement : char) (str : string) = 
         str.Replace(find, replacement)
@@ -119,7 +117,7 @@ module Parse =
         
         input 
         |> replace '-' ' ' 
-        |> split '|'
+        |> splitOn '|'
         |> toCharListList
         |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard

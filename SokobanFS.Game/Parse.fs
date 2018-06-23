@@ -18,6 +18,8 @@
 
 namespace SokobanFS.Game
 
+///
+/// Functions for parsing text into game data and back again.
 module Parse =
 
     open System
@@ -72,6 +74,9 @@ module Parse =
             | (true, num) -> Number (num) :: qualifyCharacters tail
             | (false, _) -> Character (head) :: qualifyCharacters tail
 
+    ///
+    /// Converting string sequences (rows) into Board data, using common 
+    /// Sokoban text level format.
     let internal toBoard rows =    
         
         let cleanColumnsTopAndBottom arr =
@@ -91,6 +96,8 @@ module Parse =
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board
     
+    ///
+    /// Decoding a level from a run-length encoded string into Board data. 
     let internal decodeRLE (input : string) =
 
         let toCharListList = 
@@ -116,6 +123,8 @@ module Parse =
         |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard
     
+    ///
+    /// Encoding Board data into a string, using a Sokoban-specific run-length encoding.
     let internal encodeRLE board = 
 
         let rec insertOnes list = 

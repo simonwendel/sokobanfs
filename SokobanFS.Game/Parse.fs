@@ -116,7 +116,7 @@ module Parse =
         |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
         |> toBoard
     
-    let encodeRLE board = 
+    let internal encodeRLE board = 
 
         let rec insertOnes list = 
             match list with 

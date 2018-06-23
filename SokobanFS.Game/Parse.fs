@@ -64,6 +64,14 @@ module Parse =
         | 0 -> []
         | _ -> List.ofArray array.[0,*] :: toArrayList array.[1..,*]
 
+    let rec private qualifyCharacters list = 
+        match list with 
+        | [] -> []
+        | head :: tail ->
+            match Int32.TryParse(head.ToString()) with
+            | (true, num) -> Number (num) :: qualifyCharacters tail
+            | (false, _) -> Character (head) :: qualifyCharacters tail
+
     let internal toBoard rows =    
         
         let cleanColumnsTopAndBottom arr =
@@ -82,14 +90,6 @@ module Parse =
         |> Sequence2D.toArray2D Tile.Empty
         |> cleanColumnsTopAndBottom
         |> MapsTypes.Board
-
-    let rec private qualifyCharacters list = 
-        match list with 
-        | [] -> []
-        | head :: tail ->
-            match Int32.TryParse(head.ToString()) with
-            | (true, num) -> Number (num) :: qualifyCharacters tail
-            | (false, _) -> Character (head) :: qualifyCharacters tail
     
     let internal decodeRLE (input : string) =
 

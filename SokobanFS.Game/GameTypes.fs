@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Game
 
-module MapsTypes =
+module GameTypes =
 
     type Tile =
         | Wall

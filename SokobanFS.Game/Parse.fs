@@ -24,7 +24,7 @@ module Parse =
 
     open System
 
-    open MapsTypes
+    open GameTypes
     open ParseTypes
     open SokobanFS.Lib
     open SokobanFS.Lib.String
@@ -94,7 +94,7 @@ module Parse =
                      >> Sequence.Array.trimReplace Floor Empty )
         |> Sequence2D.toArray2D Tile.Empty
         |> cleanColumnsTopAndBottom
-        |> MapsTypes.Board
+        |> GameTypes.Board
     
     ///
     /// Decoding a level from a run-length encoded string into Board data. 

@@ -24,7 +24,7 @@ module decodeRLE =
     open Xunit
 
     open SokobanFS.Game
-    open SokobanFS.Game.MapsTypes
+    open SokobanFS.Game.GameTypes
 
     [<Fact>]
     let ``Given RLE encoded level, produces valid board`` () = 

@@ -25,7 +25,7 @@ module toBoard =
     open Xunit
 
     open SokobanFS.Game
-    open SokobanFS.Game.MapsTypes
+    open SokobanFS.Game.GameTypes
     open SokobanFS.Game.ParseTypes
     open SokobanFS.Lib
 

@@ -88,10 +88,10 @@ module Parse =
 
         rows
         |> Array.ofSeq
-        |> Array.map (  trimEnd
-                     >> Array.ofSeq 
-                     >> Array.map toSquare 
-                     >> Sequence.Array.trimReplace Floor Empty )
+        |> Array.map (trimEnd
+                      >> Array.ofSeq 
+                      >> Array.map toSquare 
+                      >> Sequence.Array.trimReplace Floor Empty)
         |> Sequence2D.toArray2D Square.Empty
         |> cleanColumnsTopAndBottom
         |> GameTypes.Level
@@ -100,8 +100,7 @@ module Parse =
     /// Decoding a level from a run-length encoded string into Level data. 
     let internal decodeRLE (input : string) =
 
-        let toCharListList = 
-            (List.ofArray >> List.map List.ofSeq)
+        let toCharListList = (List.ofArray >> List.map List.ofSeq)
 
         let rec joinNumbers list =
             match list with

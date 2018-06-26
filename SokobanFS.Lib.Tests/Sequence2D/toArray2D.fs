@@ -30,11 +30,11 @@ module toArray2D =
     let ``Given integer list list and padding element, returns Array2D representation`` () = 
         
         let jaggedCollectionOfInts = 
-            [[ 1; 2; 3 ]; 
-             [ 1; 2 ]; 
-             [ 1; 2; 3 ]; 
-             [ 1; 2; 3; 4 ]; 
-             [ 1; 2; 3 ]]
+            [ [ 1; 2; 3 ]; 
+              [ 1; 2 ]; 
+              [ 1; 2; 3 ]; 
+              [ 1; 2; 3; 4 ]; 
+              [ 1; 2; 3 ] ]
 
         let expectedArray = 
             array2D 
@@ -67,4 +67,3 @@ module toArray2D =
                    [| "1"; "2"; "3"; "9"; "9" |] |]
         
          jaggedCollectionOfStrings |> Sequence2D.toArray2D "9" |> should equal expectedArray
-

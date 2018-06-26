@@ -31,11 +31,11 @@ module sizeOfJagged =
     let ``Given integer list list, computes min 2D array size that would hold the jagged collection`` () = 
         
         let jaggedCollectionOfInts = 
-            [[ 1; 2; 3 ]; 
-             [ 1; 2 ]; 
-             [ 1; 2; 3 ]; 
-             [ 1; 2; 3; 4 ]; 
-             [ 1; 2; 3 ]]
+            [ [ 1; 2; 3 ]; 
+              [ 1; 2 ]; 
+              [ 1; 2; 3 ]; 
+              [ 1; 2; 3; 4 ]; 
+              [ 1; 2; 3 ] ]
         
         jaggedCollectionOfInts |> Sequence2D.sizeOfJagged |> should equal (Dimensions2D (4, 5))
  

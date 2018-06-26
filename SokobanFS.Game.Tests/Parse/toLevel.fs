@@ -114,12 +114,12 @@ module toLevel =
         // all known mappings, except for the Space -> (Floor or Empty)
         // that is implicitly handled in the other tests
         let knownMappings = 
-            [ [ "#" ], [[ Wall ]];
-              [ "@" ], [[ Player ]];
-              [ "+" ], [[ PlayerOnGoal ]];
-              [ "$" ], [[ Box ]];
-              [ "*" ], [[ BoxOnGoal ]];
-              [ "." ], [[ Goal ]] ]
+            [ [ "#" ], [ [ Wall ] ];
+              [ "@" ], [ [ Player ] ];
+              [ "+" ], [ [ PlayerOnGoal ] ];
+              [ "$" ], [ [ Box ] ];
+              [ "*" ], [ [ BoxOnGoal ] ];
+              [ "." ], [ [ Goal ] ] ]
             |> Map.ofList
         
         knownMappings |> Map.iter (fun input expectation -> Parse.toLevel input |> should equal (Level <| array2D expectation))

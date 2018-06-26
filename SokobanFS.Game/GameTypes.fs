@@ -30,5 +30,4 @@ module GameTypes =
         | Floor
         | Empty
 
-    type Level =
-        | Level of Square[,]
+    type Level = Level of Square[,]

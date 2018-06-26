@@ -42,19 +42,19 @@ module Parse =
           '.', Goal;
           ' ', Floor ]
 
-    let private tileLookup =
+    let private squareLookup =
         mappings |> Map.ofList
 
     let private characterLookup =
         Map.ofList ((Empty, ' ') :: (List.map Tuple.swap mappings))
 
-    let private toTile character = 
+    let private toSquare character = 
         
-        match tileLookup.TryFind character with
-        | Some tile -> tile
+        match squareLookup.TryFind character with
+        | Some square -> square
         | None -> raise (InvalidFormatException "Invalid format")
 
-    let private toChar tile = characterLookup.[tile]
+    let private toChar square = characterLookup.[square]
 
     let private trimEnd (s : string) =  
         s.TrimEnd (' ')
@@ -90,9 +90,9 @@ module Parse =
         |> Array.ofSeq
         |> Array.map (  trimEnd
                      >> Array.ofSeq 
-                     >> Array.map toTile 
+                     >> Array.map toSquare 
                      >> Sequence.Array.trimReplace Floor Empty )
-        |> Sequence2D.toArray2D Tile.Empty
+        |> Sequence2D.toArray2D Square.Empty
         |> cleanColumnsTopAndBottom
         |> GameTypes.Board
     

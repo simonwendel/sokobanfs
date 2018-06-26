@@ -42,7 +42,7 @@ module encodeRLE =
         input |> Parse.encodeRLE |> should equal expectation
 
     [<Fact>]
-    let ``Given two consecutive Tiles of same type, outputs same typed characters`` () =
+    let ``Given two consecutive Squares of same type, outputs same typed characters`` () =
         
         let input = 
             Board <| array2D
@@ -53,7 +53,7 @@ module encodeRLE =
         input |> Parse.encodeRLE |> should equal expectation
 
     [<Fact>]
-    let ``Given 1230 Floor tiles, produces 1230 space characters`` () =
+    let ``Given 1230 Floor squares, produces 1230 space characters`` () =
 
         let input = 
             Parse.toBoard <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]

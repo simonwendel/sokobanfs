@@ -42,7 +42,7 @@ module decodeRLE =
         input |> Parse.decodeRLE |> should equal expectation
 
     [<Fact>]
-    let ``Given two consecutive characters of same type, outputs same typed tiles`` () =
+    let ``Given two consecutive characters of same type, outputs same typed squares`` () =
 
         let input = "##"
 
@@ -53,7 +53,7 @@ module decodeRLE =
         input |> Parse.decodeRLE |> should equal expectation
 
     [<Fact>]
-    let ``Given two RLE encoded characters of same type, outputs same typed tiles`` () =
+    let ``Given two RLE encoded characters of same type, outputs same typed squares`` () =
 
         let input = "2#"
 
@@ -64,7 +64,7 @@ module decodeRLE =
         input |> Parse.decodeRLE |> should equal expectation
 
     [<Fact>]
-    let ``Given 12300 space characters, outputs 12300 floor tiles`` () =
+    let ``Given 12300 space characters, outputs 12300 floor squares`` () =
 
         let input = "#12300-#"
 
@@ -74,7 +74,7 @@ module decodeRLE =
         input |> Parse.decodeRLE |> should equal expectation
         
     [<Fact>]
-    let ``Given number without following tile character, throws exception`` () =
+    let ``Given number without following square character, throws exception`` () =
 
         let input = "$$|#100"
 

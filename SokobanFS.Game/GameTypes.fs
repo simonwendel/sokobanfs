@@ -20,7 +20,7 @@ namespace SokobanFS.Game
 
 module GameTypes =
 
-    type Tile =
+    type Square =
         | Wall
         | Player
         | PlayerOnGoal
@@ -31,4 +31,4 @@ module GameTypes =
         | Empty
 
     type Board =
-        | Board of Tile[,]
+        | Board of Square[,]

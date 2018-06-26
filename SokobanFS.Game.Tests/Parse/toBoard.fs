@@ -42,7 +42,7 @@ module toBoard =
 
         let expectation =
             Board <| Sequence2D.toArray2D 
-                Tile.Empty
+                Square.Empty
                 [ [ Empty; Empty; Wall; Wall; Wall; Wall ];
                   [ Wall; Wall; Wall; Floor; Floor; Wall; Wall; Wall; Wall ];
                   [ Wall; Floor; Floor; Floor; Floor; Floor; Box; Floor; Wall ];
@@ -67,7 +67,7 @@ module toBoard =
         input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
-    let ``Given extra spaces on the left, cleans them up with empty tiles`` () =
+    let ``Given extra spaces on the left, cleans them up with empty squares`` () =
 
         let input = 
             [ "  #";
@@ -81,7 +81,7 @@ module toBoard =
         input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
-    let ``Given extra spaces on the top, cleans them up with empty tiles`` () =
+    let ``Given extra spaces on the top, cleans them up with empty squares`` () =
 
         let input = 
             [ "* *";
@@ -95,7 +95,7 @@ module toBoard =
         input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
-    let ``Given extra spaces on the bottom, cleans them up with empty tiles`` () =
+    let ``Given extra spaces on the bottom, cleans them up with empty squares`` () =
 
         let input = 
             [ "###"; 
@@ -109,7 +109,7 @@ module toBoard =
         input |> Parse.toBoard |> should equal expectation
 
     [<Fact>]
-    let ``Converting known level format character produces corresponding tile`` () = 
+    let ``Converting known level format character produces corresponding square`` () = 
         
         // all known mappings, except for the Space -> (Floor or Empty)
         // that is implicitly handled in the other tests
@@ -127,9 +127,9 @@ module toBoard =
     [<Property>]
     let ``Converting unknown level format character, throws InvalidFormat exception`` (character : char) =
 
-        let validTileCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
+        let validSquareCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 
         let input = character.ToString()
         
-        not (validTileCharacters |> List.contains input) ==> 
+        not (validSquareCharacters |> List.contains input) ==> 
             lazy (Assert.Throws<InvalidFormatException> (fun () -> Parse.toBoard [ input ] |> ignore) |> ignore)

@@ -75,9 +75,9 @@ module Parse =
             | (false, _) -> Character (head) :: qualifyCharacters tail
 
     ///
-    /// Converting string sequences (rows) into Board data, using common 
+    /// Converting string sequences (rows) into Level data, using common 
     /// Sokoban text level format.
-    let internal toBoard rows =    
+    let internal toLevel rows =    
         
         let cleanColumnsTopAndBottom arr =
             for colNum = 0 to Array2D.length2 arr - 1 do
@@ -94,10 +94,10 @@ module Parse =
                      >> Sequence.Array.trimReplace Floor Empty )
         |> Sequence2D.toArray2D Square.Empty
         |> cleanColumnsTopAndBottom
-        |> GameTypes.Board
+        |> GameTypes.Level
     
     ///
-    /// Decoding a level from a run-length encoded string into Board data. 
+    /// Decoding a level from a run-length encoded string into Level data. 
     let internal decodeRLE (input : string) =
 
         let toCharListList = 
@@ -121,11 +121,11 @@ module Parse =
         |> splitOn '|'
         |> toCharListList
         |> List.map (qualifyCharacters >> joinNumbers >> expandCharacters >> List.reduce (+))
-        |> toBoard
+        |> toLevel
     
     ///
-    /// Encoding Board data into a string, using a Sokoban-specific run-length encoding.
-    let internal encodeRLE board = 
+    /// Encoding Level data into a string, using a Sokoban-specific run-length encoding.
+    let internal encodeRLE level = 
 
         let rec insertOnes list = 
             match list with 
@@ -156,9 +156,9 @@ module Parse =
                     number :: character :: stringifyTokens tail
             | illegal -> raise (InvalidFormatException (illegal.ToString()))
         
-        match board with
-        | Board board ->
-            board 
+        match level with
+        | Level level ->
+            level 
             |> Array2D.map toChar
             |> toArrayList 
             |> List.map (String.fromSeq >> trimEnd >> toChars >> qualifyCharacters >> insertOnes >> countRepetitions >> stringifyTokens >> String.fromSeq)

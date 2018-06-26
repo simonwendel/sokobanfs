@@ -9,7 +9,7 @@
   <ItemGroup>
     <Compile Include="Parse\encodeRLE.fs" />
     <Compile Include="Parse\decodeRLE.fs" />
-    <Compile Include="Parse\toBoard.fs" />
+    <Compile Include="Parse\toLevel.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

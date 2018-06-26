@@ -27,12 +27,12 @@ module decodeRLE =
     open SokobanFS.Game.GameTypes
 
     [<Fact>]
-    let ``Given RLE encoded level, produces valid board`` () = 
+    let ``Given RLE encoded level, produces valid Level`` () = 
 
         let input = "3#|#.3#|#*$-#|#--@#|5#"
 
         let expectation = 
-            Board <| array2D 
+            Level <| array2D 
                 [ [ Wall; Wall; Wall; Empty; Empty ]
                   [ Wall; Goal; Wall; Wall; Wall ]
                   [ Wall; BoxOnGoal; Box; Floor; Wall ]
@@ -47,7 +47,7 @@ module decodeRLE =
         let input = "##"
 
         let expectation = 
-            Board <| array2D
+            Level <| array2D
                 [ [ Wall; Wall ] ]
 
         input |> Parse.decodeRLE |> should equal expectation
@@ -58,7 +58,7 @@ module decodeRLE =
         let input = "2#"
 
         let expectation = 
-            Board <| array2D
+            Level <| array2D
                 [ [ Wall; Wall ] ]
 
         input |> Parse.decodeRLE |> should equal expectation
@@ -69,7 +69,7 @@ module decodeRLE =
         let input = "#12300-#"
 
         let expectation = 
-            Parse.toBoard <| [ String.concat "" [ "#"; String.replicate 12300 " "; "#" ] ]
+            Parse.toLevel <| [ String.concat "" [ "#"; String.replicate 12300 " "; "#" ] ]
 
         input |> Parse.decodeRLE |> should equal expectation
         

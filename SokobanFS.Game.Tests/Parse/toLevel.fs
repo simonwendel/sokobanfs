@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Game.Tests.Parse
 
-module toBoard =
+module toLevel =
 
     open FsCheck
     open FsUnit
@@ -30,7 +30,7 @@ module toBoard =
     open SokobanFS.Lib
 
     [<Fact>]
-    let ``Given known level format, produces valid board`` () = 
+    let ``Given known level format, produces valid Level`` () = 
 
         let input = 
             [ "  ####";
@@ -41,7 +41,7 @@ module toBoard =
               "#########" ]
 
         let expectation =
-            Board <| Sequence2D.toArray2D 
+            Level <| Sequence2D.toArray2D 
                 Square.Empty
                 [ [ Empty; Empty; Wall; Wall; Wall; Wall ];
                   [ Wall; Wall; Wall; Floor; Floor; Wall; Wall; Wall; Wall ];
@@ -50,7 +50,7 @@ module toBoard =
                   [ Wall; Floor; Goal; Floor; Goal; Wall; Player; Floor; Wall ];
                   [ Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall ] ]
 
-        input |> Parse.toBoard |> should equal expectation
+        input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the right, trims them off`` () =
@@ -60,11 +60,11 @@ module toBoard =
               "*       " ]
 
         let expectation =
-           Board <| array2D 
+           Level <| array2D 
             [ [ Wall ]; 
               [ BoxOnGoal ] ]
 
-        input |> Parse.toBoard |> should equal expectation
+        input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the left, cleans them up with empty squares`` () =
@@ -74,11 +74,11 @@ module toBoard =
               "  *" ]
 
         let expectation =
-           Board <| array2D 
+           Level <| array2D 
             [ [ Empty; Empty; Wall ]; 
               [ Empty; Empty; BoxOnGoal ] ]
 
-        input |> Parse.toBoard |> should equal expectation
+        input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the top, cleans them up with empty squares`` () =
@@ -88,11 +88,11 @@ module toBoard =
               "###" ]
 
         let expectation =
-           Board <| array2D 
+           Level <| array2D 
             [ [ BoxOnGoal; Empty; BoxOnGoal ]; 
               [ Wall; Wall; Wall ] ]
 
-        input |> Parse.toBoard |> should equal expectation
+        input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the bottom, cleans them up with empty squares`` () =
@@ -102,11 +102,11 @@ module toBoard =
               "* *" ]
 
         let expectation =
-           Board <| array2D 
+           Level <| array2D 
             [ [ Wall; Wall; Wall ];
               [ BoxOnGoal; Empty; BoxOnGoal ] ]
 
-        input |> Parse.toBoard |> should equal expectation
+        input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Converting known level format character produces corresponding square`` () = 
@@ -122,7 +122,7 @@ module toBoard =
               [ "." ], [[ Goal ]] ]
             |> Map.ofList
         
-        knownMappings |> Map.iter (fun input expectation -> Parse.toBoard input |> should equal (Board <| array2D expectation))
+        knownMappings |> Map.iter (fun input expectation -> Parse.toLevel input |> should equal (Level <| array2D expectation))
 
     [<Property>]
     let ``Converting unknown level format character, throws InvalidFormat exception`` (character : char) =
@@ -132,4 +132,4 @@ module toBoard =
         let input = character.ToString()
         
         not (validSquareCharacters |> List.contains input) ==> 
-            lazy (Assert.Throws<InvalidFormatException> (fun () -> Parse.toBoard [ input ] |> ignore) |> ignore)
+            lazy (Assert.Throws<InvalidFormatException> (fun () -> Parse.toLevel [ input ] |> ignore) |> ignore)

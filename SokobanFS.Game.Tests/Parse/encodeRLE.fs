@@ -27,10 +27,10 @@ module encodeRLE =
     open SokobanFS.Game.GameTypes
 
     [<Fact>]
-    let ``Given board, produces RLE encoded level`` () = 
+    let ``Given Level, produces RLE encoded level string`` () = 
 
         let input = 
-            Board <| array2D 
+            Level <| array2D 
                 [ [ Wall; Wall; Wall; Empty; Empty ]
                   [ Wall; Goal; Wall; Wall; Wall ]
                   [ Wall; BoxOnGoal; Box; Floor; Wall ]
@@ -45,7 +45,7 @@ module encodeRLE =
     let ``Given two consecutive Squares of same type, outputs same typed characters`` () =
         
         let input = 
-            Board <| array2D
+            Level <| array2D
                 [ [ Wall; Wall ] ]
 
         let expectation = "##"
@@ -56,7 +56,7 @@ module encodeRLE =
     let ``Given 1230 Floor squares, produces 1230 space characters`` () =
 
         let input = 
-            Parse.toBoard <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]
+            Parse.toLevel <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]
 
         let expectation = "#1230-#"
 

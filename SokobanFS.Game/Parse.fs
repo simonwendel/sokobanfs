@@ -163,3 +163,9 @@ module Parse =
             |> List.map (String.fromSeq >> trimEnd >> toChars >> qualifyCharacters >> insertOnes >> countRepetitions >> stringifyTokens >> String.fromSeq)
             |> String.concat "|"
             |> replace ' ' '-' 
+            
+    ///
+    /// Takes a list of string formatted levels and produces a LevelCollection.
+    let internal toLevelCollection name data = 
+        { name = name;
+          levels = List.map toLevel data }

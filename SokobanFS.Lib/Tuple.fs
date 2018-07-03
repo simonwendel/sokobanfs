@@ -20,4 +20,4 @@ namespace SokobanFS.Lib
 
 module Tuple =
 
-    let swap (first, second) = (second, first)
+    let swap (first, second) = second, first

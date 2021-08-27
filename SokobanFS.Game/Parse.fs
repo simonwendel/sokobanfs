@@ -125,7 +125,7 @@ module Parse =
             qualifyCharacters
             >> joinNumbers
             >> expandCharacters
-            >> List.reduce (+)
+            >> String.concat ""
         )
         |> toLevel
 

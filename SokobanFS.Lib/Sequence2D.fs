@@ -38,6 +38,7 @@ module Sequence2D =
     /// Converts a jagged sequence of sequences into Array2D.
     /// </summary>
     /// <param name="padding">Value to pad with if row has too few columns.</param>
+    /// <param name="jagged">A possibly jagged sequence of sequences to convert to Array2D.</param>
     /// <return>
     /// Array2D initialized from provided sequence of sequences, possibly padded.
     /// </return>

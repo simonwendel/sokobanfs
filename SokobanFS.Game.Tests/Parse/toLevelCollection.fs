@@ -29,17 +29,17 @@ module toLevelCollection =
     open SokobanFS.Lib
 
     [<Fact>]
-    let ``Given known level format, produces valid LevelCollection`` () = 
+    let ``Given known level format, produces valid LevelCollection`` () =
 
-        let text = 
-            [ "  ####";
-              "###  ####";
-              "#     $ #";
-              "# #  #$ #";
-              "# . .#@ #";
+        let text =
+            [ "  ####"
+              "###  ####"
+              "#     $ #"
+              "# #  #$ #"
+              "# . .#@ #"
               "#########" ]
 
-        let input = [ text; text; text ];
+        let input = [ text; text; text ]
 
         let level =
             Level <| Sequence2D.toArray2D 
@@ -51,8 +51,10 @@ module toLevelCollection =
                   [ Wall; Floor; Goal; Floor; Goal; Wall; Player; Floor; Wall ];
                   [ Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall; Wall ] ]
 
-        let expectation = 
-            { name = "Kickass Level"; 
+        let expectation =
+            { name = "Kickass Level"
               levels = [ level; level; level ] }
 
-        input |> Parse.toLevelCollection "Kickass Level" |> should equal expectation
+        input
+        |> Parse.toLevelCollection "Kickass Level"
+        |> should equal expectation

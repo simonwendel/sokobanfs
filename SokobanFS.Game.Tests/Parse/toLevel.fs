@@ -30,14 +30,14 @@ module toLevel =
     open SokobanFS.Lib
 
     [<Fact>]
-    let ``Given known level format, produces valid Level`` () = 
+    let ``Given known level format, produces valid Level`` () =
 
-        let input = 
-            [ "  ####";
-              "###  ####";
-              "#     $ #";
-              "# #  #$ #";
-              "# . .#@ #";
+        let input =
+            [ "  ####"
+              "###  ####"
+              "#     $ #"
+              "# #  #$ #"
+              "# . .#@ #"
               "#########" ]
 
         let expectation =
@@ -55,81 +55,77 @@ module toLevel =
     [<Fact>]
     let ``Given extra spaces on the right, trims them off`` () =
 
-        let input = 
-            [ "#       ";
-              "*       " ]
+        let input = [ "#       "; "*       " ]
 
         let expectation =
-           Level <| array2D 
-            [ [ Wall ]; 
-              [ BoxOnGoal ] ]
+            Level <| array2D [ [ Wall ]; [ BoxOnGoal ] ]
 
         input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the left, cleans them up with empty squares`` () =
 
-        let input = 
-            [ "  #";
-              "  *" ]
+        let input = [ "  #"; "  *" ]
 
         let expectation =
-           Level <| array2D 
-            [ [ Empty; Empty; Wall ]; 
-              [ Empty; Empty; BoxOnGoal ] ]
+            Level
+            <| array2D [ [ Empty; Empty; Wall ]
+                         [ Empty; Empty; BoxOnGoal ] ]
 
         input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the top, cleans them up with empty squares`` () =
 
-        let input = 
-            [ "* *";
-              "###" ]
+        let input = [ "* *"; "###" ]
 
         let expectation =
-           Level <| array2D 
-            [ [ BoxOnGoal; Empty; BoxOnGoal ]; 
-              [ Wall; Wall; Wall ] ]
+            Level
+            <| array2D [ [ BoxOnGoal; Empty; BoxOnGoal ]
+                         [ Wall; Wall; Wall ] ]
 
         input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the bottom, cleans them up with empty squares`` () =
 
-        let input = 
-            [ "###"; 
-              "* *" ]
+        let input = [ "###"; "* *" ]
 
         let expectation =
-           Level <| array2D 
-            [ [ Wall; Wall; Wall ];
-              [ BoxOnGoal; Empty; BoxOnGoal ] ]
+            Level
+            <| array2D [ [ Wall; Wall; Wall ]
+                         [ BoxOnGoal; Empty; BoxOnGoal ] ]
 
         input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
-    let ``Converting known level format character produces corresponding square`` () = 
-        
+    let ``Converting known level format character produces corresponding square`` () =
+
         // all known mappings, except for the Space -> (Floor or Empty)
         // that is implicitly handled in the other tests
-        let knownMappings = 
-            [ [ "#" ], [ [ Wall ] ];
-              [ "@" ], [ [ Player ] ];
-              [ "+" ], [ [ PlayerOnGoal ] ];
-              [ "$" ], [ [ Box ] ];
-              [ "*" ], [ [ BoxOnGoal ] ];
+        let knownMappings =
+            [ [ "#" ], [ [ Wall ] ]
+              [ "@" ], [ [ Player ] ]
+              [ "+" ], [ [ PlayerOnGoal ] ]
+              [ "$" ], [ [ Box ] ]
+              [ "*" ], [ [ BoxOnGoal ] ]
               [ "." ], [ [ Goal ] ] ]
             |> Map.ofList
-        
-        knownMappings |> Map.iter (fun input expectation -> Parse.toLevel input |> should equal (Level <| array2D expectation))
+
+        knownMappings
+        |> Map.iter
+            (fun input expectation ->
+                Parse.toLevel input
+                |> should equal (Level <| array2D expectation))
 
     [<Property>]
-    let ``Converting unknown level format character, throws InvalidFormat exception`` (character : char) =
+    let ``Converting unknown level format character, throws InvalidFormat exception`` (character: char) =
 
         let validSquareCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 
         let input = character.ToString()
-        
-        not (validSquareCharacters |> List.contains input) ==> 
-            lazy (Assert.Throws<InvalidFormatException> (fun () -> Parse.toLevel [ input ] |> ignore) |> ignore)
+
+        not (validSquareCharacters |> List.contains input)
+        ==> lazy
+            (Assert.Throws<InvalidFormatException>(fun () -> Parse.toLevel [ input ] |> ignore)
+             |> ignore)

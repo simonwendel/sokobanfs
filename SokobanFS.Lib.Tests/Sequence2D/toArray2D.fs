@@ -19,51 +19,53 @@
 namespace SokobanFS.Lib.Tests.Sequence2D
 
 module toArray2D =
-    
+
     open FsCheck
     open FsUnit
     open Xunit
 
     open SokobanFS.Lib
-    
+
     [<Fact>]
-    let ``Given integer list list and padding element, returns Array2D representation`` () = 
-        
-        let jaggedCollectionOfInts = 
-            [ [ 1; 2; 3 ]; 
-              [ 1; 2 ]; 
-              [ 1; 2; 3 ]; 
-              [ 1; 2; 3; 4 ]; 
+    let ``Given integer list list and padding element, returns Array2D representation`` () =
+
+        let jaggedCollectionOfInts =
+            [ [ 1; 2; 3 ]
+              [ 1; 2 ]
+              [ 1; 2; 3 ]
+              [ 1; 2; 3; 4 ]
               [ 1; 2; 3 ] ]
 
-        let expectedArray = 
-            array2D 
-                [| [| 1; 2; 3; 9 |]; 
-                   [| 1; 2; 9; 9 |]; 
-                   [| 1; 2; 3; 9 |]; 
-                   [| 1; 2; 3; 4 |]; 
-                   [| 1; 2; 3; 9 |] |]
+        let expectedArray =
+            array2D [| [| 1; 2; 3; 9 |]
+                       [| 1; 2; 9; 9 |]
+                       [| 1; 2; 3; 9 |]
+                       [| 1; 2; 3; 4 |]
+                       [| 1; 2; 3; 9 |] |]
 
-        jaggedCollectionOfInts |> Sequence2D.toArray2D 9 |> should equal expectedArray
- 
+        jaggedCollectionOfInts
+        |> Sequence2D.toArray2D 9
+        |> should equal expectedArray
+
     [<Fact>]
-    let ``Given string array array and padding element, returns Array2D representation`` () = 
+    let ``Given string array array and padding element, returns Array2D representation`` () =
 
-         let jaggedCollectionOfStrings =
-            [| [| "1"; "2"; "3"; "4" |]; 
-               [| "1"; "2"; "3"; "4"; "5" |]; 
-               [| "1"; "2"; "3" |]; 
-               [| "1"; "2" |]; 
-               [| "1"; "2"; "3" |];
+        let jaggedCollectionOfStrings =
+            [| [| "1"; "2"; "3"; "4" |]
+               [| "1"; "2"; "3"; "4"; "5" |]
+               [| "1"; "2"; "3" |]
+               [| "1"; "2" |]
+               [| "1"; "2"; "3" |]
                [| "1"; "2"; "3" |] |]
 
-         let expectedArray =
-            array2D  
-                [| [| "1"; "2"; "3"; "4"; "9" |]; 
-                   [| "1"; "2"; "3"; "4"; "5" |]; 
-                   [| "1"; "2"; "3"; "9"; "9" |]; 
-                   [| "1"; "2"; "9"; "9"; "9" |]; 
-                   [| "1"; "2"; "3"; "9"; "9" |];
-                   [| "1"; "2"; "3"; "9"; "9" |] |]
-        
-         jaggedCollectionOfStrings |> Sequence2D.toArray2D "9" |> should equal expectedArray
+        let expectedArray =
+            array2D [| [| "1"; "2"; "3"; "4"; "9" |]
+                       [| "1"; "2"; "3"; "4"; "5" |]
+                       [| "1"; "2"; "3"; "9"; "9" |]
+                       [| "1"; "2"; "9"; "9"; "9" |]
+                       [| "1"; "2"; "3"; "9"; "9" |]
+                       [| "1"; "2"; "3"; "9"; "9" |] |]
+
+        jaggedCollectionOfStrings
+        |> Sequence2D.toArray2D "9"
+        |> should equal expectedArray

@@ -23,28 +23,35 @@ module Sequence =
     module private HigherOrder =
 
         let trimReplace mapFoldFn revFn =
-    
+
             fun value replacement seq ->
 
                 let folder shouldContinue element =
-                    if shouldContinue && element = value
-                    then (replacement, true)
-                    else (element, false)
+                    if shouldContinue && element = value then
+                        (replacement, true)
+                    else
+                        (element, false)
 
-                seq 
-                |> mapFoldFn folder true |> fst
-                |> revFn 
-                |> mapFoldFn folder true |> fst 
+                seq
+                |> mapFoldFn folder true
+                |> fst
+                |> revFn
+                |> mapFoldFn folder true
+                |> fst
                 |> revFn
 
     module Array =
-    
-        let trimReplace value replacement array = 
-            let arrayTrimReplace = HigherOrder.trimReplace Array.mapFold Array.rev
+
+        let trimReplace value replacement array =
+            let arrayTrimReplace =
+                HigherOrder.trimReplace Array.mapFold Array.rev
+
             arrayTrimReplace value replacement array
 
     module List =
 
-        let trimReplace value replacement list = 
-            let listTrimReplace = HigherOrder.trimReplace List.mapFold List.rev
+        let trimReplace value replacement list =
+            let listTrimReplace =
+                HigherOrder.trimReplace List.mapFold List.rev
+
             listTrimReplace value replacement list

@@ -36,5 +36,4 @@ open System.Runtime.InteropServices
 
 [<assembly: InternalsVisibleTo("SokobanFS.Converter.Tests")>]
 
-do
-    ()
+do ()

@@ -30,6 +30,6 @@ module GameTypes =
         | Floor
         | Empty
 
-    type Level = Level of Square[,]
+    type Level = Level of Square [,]
 
-    type LevelCollection = { name : string; levels : Level list }
+    type LevelCollection = { name: string; levels: Level list }

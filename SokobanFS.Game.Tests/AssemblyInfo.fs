@@ -33,5 +33,4 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyVersion("0.1.*")>]
 [<assembly: AssemblyFileVersion("0.1.*")>]
 
-do
-    ()
+do ()

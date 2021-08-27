@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Lib.Tests.String
 
-module replace = 
+module replace =
 
     open FsUnit
     open Xunit
@@ -32,4 +32,6 @@ module replace =
 
         let expected = "string-with-some-separation-by-chars"
 
-        input |> String.replace '+' '-' |> should equal expected
+        input
+        |> String.replace '+' '-'
+        |> should equal expected

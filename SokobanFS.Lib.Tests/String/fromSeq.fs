@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Lib.Tests.String
 
-module fromSeq = 
+module fromSeq =
 
     open FsUnit
     open Xunit
@@ -28,7 +28,7 @@ module fromSeq =
     [<Fact>]
     let ``Given int list, creates string from elements`` () =
 
-        let input = [ 1; 2; 3; ]
+        let input = [ 1; 2; 3 ]
 
         let expected = "123"
 
@@ -37,7 +37,7 @@ module fromSeq =
     [<Fact>]
     let ``Given string array, creates string from elements`` () =
 
-        let input = [ "1"; "2"; "3"; ]
+        let input = [ "1"; "2"; "3" ]
 
         let expected = "123"
 

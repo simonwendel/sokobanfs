@@ -18,8 +18,8 @@
 
 namespace SokobanFS.Lib.Tests.Tuple
 
-module swap = 
-  
+module swap =
+
     open FsCheck
     open FsUnit
     open Xunit
@@ -29,39 +29,44 @@ module swap =
     let private always = true
 
     [<Property>]
-    let ``Given int*string tuple, will swap first and second value `` (first : int, second : string) = 
+    let ``Given int*string tuple, will swap first and second value `` (first: int, second: string) =
 
-        always ==> ((first, second) |> Tuple.swap = (second, first))
-    
-    [<Property>]
-    let ``Given string*string tuple, will swap first and second value `` (first : string, second : string) = 
-
-        always ==> ((first, second) |> Tuple.swap = (second, first))
-
+        always
+        ==> ((first, second) |> Tuple.swap = (second, first))
 
     [<Property>]
-    let ``Given float*char tuple, fst not NaN, will swap first and second value `` (first : NormalFloat, second : char) = 
+    let ``Given string*string tuple, will swap first and second value `` (first: string, second: string) =
 
-        always ==> ((first, second) |> Tuple.swap = (second, first))
+        always
+        ==> ((first, second) |> Tuple.swap = (second, first))
+
 
     [<Property>]
-    let ``Given float*int tuple, fst = NaN, will swap first and second value `` (second : int) = 
+    let ``Given float*char tuple, fst not NaN, will swap first and second value `` (first: NormalFloat, second: char) =
+
+        always
+        ==> ((first, second) |> Tuple.swap = (second, first))
+
+    [<Property>]
+    let ``Given float*int tuple, fst = NaN, will swap first and second value `` (second: int) =
 
         let first = nan
 
         let nanIsSwapped swapped =
             fst swapped = second
-            && System.Double.IsNaN (snd swapped)
+            && System.Double.IsNaN(snd swapped)
 
-        always ==> ((first, second) |> Tuple.swap |> nanIsSwapped)
+        always
+        ==> ((first, second) |> Tuple.swap |> nanIsSwapped)
 
     [<Property>]
-    let ``Given float*string tuple, fst = NaN, will swap first and second value `` (second : string) = 
+    let ``Given float*string tuple, fst = NaN, will swap first and second value `` (second: string) =
 
         let first = infinity
 
         let infinityIsSwapped swapped =
             fst swapped = second
-            && System.Double.IsInfinity (snd swapped)
+            && System.Double.IsInfinity(snd swapped)
 
-        always ==> ((first, second) |> Tuple.swap |> infinityIsSwapped)
+        always
+        ==> ((first, second) |> Tuple.swap |> infinityIsSwapped)

@@ -20,11 +20,11 @@ namespace SokobanFS.Lib
 
 module String =
 
-    let fromSeq seq = 
-        seq 
-        |> Seq.map (fun el -> el.ToString()) 
+    let fromSeq seq =
+        seq
+        |> Seq.map (fun el -> el.ToString())
         |> Seq.reduce (+)
 
-    let splitOn (separator : char) (str : string) = str.Split(separator)
+    let splitOn (separator: char) (str: string) = str.Split(separator)
 
-    let replace (find : char) (replacement : char) (str : string) = str.Replace(find, replacement)
+    let replace (find: char) (replacement: char) (str: string) = str.Replace(find, replacement)

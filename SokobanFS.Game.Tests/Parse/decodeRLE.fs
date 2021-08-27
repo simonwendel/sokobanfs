@@ -27,55 +27,61 @@ module decodeRLE =
     open SokobanFS.Game.GameTypes
 
     [<Fact>]
-    let ``Given RLE encoded level, produces valid Level`` () = 
+    let ``Given RLE encoded level, produces valid Level`` () =
 
         let input = "3#|#.3#|#*$-#|#--@#|5#"
 
-        let expectation = 
-            Level <| array2D 
-                [ [ Wall; Wall; Wall; Empty; Empty ]
-                  [ Wall; Goal; Wall; Wall; Wall ]
-                  [ Wall; BoxOnGoal; Box; Floor; Wall ]
-                  [ Wall; Floor; Floor; Player; Wall ]
-                  [ Wall; Wall; Wall; Wall; Wall ] ]
+        let expectation =
+            Level
+            <| array2D [ [ Wall; Wall; Wall; Empty; Empty ]
+                         [ Wall; Goal; Wall; Wall; Wall ]
+                         [ Wall; BoxOnGoal; Box; Floor; Wall ]
+                         [ Wall; Floor; Floor; Player; Wall ]
+                         [ Wall; Wall; Wall; Wall; Wall ] ]
 
-        input |> Parse.decodeRLE |> should equal expectation
+        input
+        |> Parse.decodeRLE
+        |> should equal expectation
 
     [<Fact>]
     let ``Given two consecutive characters of same type, outputs same typed squares`` () =
 
         let input = "##"
 
-        let expectation = 
-            Level <| array2D
-                [ [ Wall; Wall ] ]
+        let expectation = Level <| array2D [ [ Wall; Wall ] ]
 
-        input |> Parse.decodeRLE |> should equal expectation
+        input
+        |> Parse.decodeRLE
+        |> should equal expectation
 
     [<Fact>]
     let ``Given two RLE encoded characters of same type, outputs same typed squares`` () =
 
         let input = "2#"
 
-        let expectation = 
-            Level <| array2D
-                [ [ Wall; Wall ] ]
+        let expectation = Level <| array2D [ [ Wall; Wall ] ]
 
-        input |> Parse.decodeRLE |> should equal expectation
+        input
+        |> Parse.decodeRLE
+        |> should equal expectation
 
     [<Fact>]
     let ``Given 12300 space characters, outputs 12300 floor squares`` () =
 
         let input = "#12300-#"
 
-        let expectation = 
-            Parse.toLevel <| [ String.concat "" [ "#"; String.replicate 12300 " "; "#" ] ]
+        let expectation =
+            Parse.toLevel
+            <| [ String.concat "" [ "#"; String.replicate 12300 " "; "#" ] ]
 
-        input |> Parse.decodeRLE |> should equal expectation
-        
+        input
+        |> Parse.decodeRLE
+        |> should equal expectation
+
     [<Fact>]
     let ``Given number without following square character, throws exception`` () =
 
         let input = "$$|#100"
 
-        (fun () -> input |> Parse.decodeRLE |> ignore) |> should throw typeof<ParseTypes.InvalidFormatException>
+        (fun () -> input |> Parse.decodeRLE |> ignore)
+        |> should throw typeof<ParseTypes.InvalidFormatException>

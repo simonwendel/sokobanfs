@@ -18,8 +18,8 @@
 
 namespace SokobanFS.Lib.Tests.Sequence
 
-module trimReplace = 
-  
+module trimReplace =
+
     open FsCheck
     open FsUnit
     open Xunit
@@ -29,25 +29,41 @@ module trimReplace =
     module List =
 
         [<Fact>]
-        let ``Given integer list and replacement options, should trim off and replace elements`` () = 
+        let ``Given integer list and replacement options, should trim off and replace elements`` () =
 
-            let input = 
-                [ 1; 1; 1; 2; 1; 2; 3; 1 ];
+            let input = [ 1; 1; 1; 2; 1; 2; 3; 1 ]
 
-            let expectation = 
-                [ 9; 9; 9; 2; 1; 2; 3; 9 ];
+            let expectation = [ 9; 9; 9; 2; 1; 2; 3; 9 ]
 
-            input |> Sequence.List.trimReplace 1 9 |> should equal expectation
- 
+            input
+            |> Sequence.List.trimReplace 1 9
+            |> should equal expectation
+
     module Array =
 
         [<Fact>]
-        let ``Given string array and replacement options, should trim off and replace elements`` () = 
+        let ``Given string array and replacement options, should trim off and replace elements`` () =
 
-            let input = 
-                [| "1"; "1"; "1"; "2"; "1"; "2"; "3"; "1" |];
+            let input =
+                [| "1"
+                   "1"
+                   "1"
+                   "2"
+                   "1"
+                   "2"
+                   "3"
+                   "1" |]
 
-            let expectation = 
-                [| "9"; "9"; "9"; "2"; "1"; "2"; "3"; "9" |];
+            let expectation =
+                [| "9"
+                   "9"
+                   "9"
+                   "2"
+                   "1"
+                   "2"
+                   "3"
+                   "9" |]
 
-            input |> Sequence.Array.trimReplace "1" "9"  |> should equal expectation
+            input
+            |> Sequence.Array.trimReplace "1" "9"
+            |> should equal expectation

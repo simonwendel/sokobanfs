@@ -18,7 +18,7 @@
 
 namespace SokobanFS.Lib.Tests.String
 
-module splitOn = 
+module splitOn =
 
     open FsUnit
     open Xunit
@@ -30,6 +30,14 @@ module splitOn =
 
         let input = "string with some separation by spaces"
 
-        let expected = [| "string"; "with"; "some"; "separation"; "by"; "spaces" |]
+        let expected =
+            [| "string"
+               "with"
+               "some"
+               "separation"
+               "by"
+               "spaces" |]
 
-        input |> String.splitOn ' ' |> should equal expected
+        input
+        |> String.splitOn ' '
+        |> should equal expected

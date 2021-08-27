@@ -27,37 +27,42 @@ module encodeRLE =
     open SokobanFS.Game.GameTypes
 
     [<Fact>]
-    let ``Given Level, produces RLE encoded level string`` () = 
+    let ``Given Level, produces RLE encoded level string`` () =
 
-        let input = 
-            Level <| array2D 
-                [ [ Wall; Wall; Wall; Empty; Empty ]
-                  [ Wall; Goal; Wall; Wall; Wall ]
-                  [ Wall; BoxOnGoal; Box; Floor; Wall ]
-                  [ Wall; Floor; Floor; Player; Wall ]
-                  [ Wall; Wall; Wall; Wall; Wall ] ]
+        let input =
+            Level
+            <| array2D [ [ Wall; Wall; Wall; Empty; Empty ]
+                         [ Wall; Goal; Wall; Wall; Wall ]
+                         [ Wall; BoxOnGoal; Box; Floor; Wall ]
+                         [ Wall; Floor; Floor; Player; Wall ]
+                         [ Wall; Wall; Wall; Wall; Wall ] ]
 
         let expectation = "3#|#.3#|#*$-#|#--@#|5#"
 
-        input |> Parse.encodeRLE |> should equal expectation
+        input
+        |> Parse.encodeRLE
+        |> should equal expectation
 
     [<Fact>]
     let ``Given two consecutive Squares of same type, outputs same typed characters`` () =
-        
-        let input = 
-            Level <| array2D
-                [ [ Wall; Wall ] ]
+
+        let input = Level <| array2D [ [ Wall; Wall ] ]
 
         let expectation = "##"
 
-        input |> Parse.encodeRLE |> should equal expectation
+        input
+        |> Parse.encodeRLE
+        |> should equal expectation
 
     [<Fact>]
     let ``Given 1230 Floor squares, produces 1230 space characters`` () =
 
-        let input = 
-            Parse.toLevel <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]
+        let input =
+            Parse.toLevel
+            <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]
 
         let expectation = "#1230-#"
 
-        input |> Parse.encodeRLE |> should equal expectation
+        input
+        |> Parse.encodeRLE
+        |> should equal expectation

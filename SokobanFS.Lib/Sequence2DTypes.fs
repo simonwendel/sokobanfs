@@ -20,5 +20,4 @@ namespace SokobanFS.Lib
 
 module Sequence2DTypes =
 
-    type Dimensions =
-        | Dimensions2D of int * int
+    type Dimensions = Dimensions2D of int * int

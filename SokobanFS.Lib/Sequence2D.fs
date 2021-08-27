@@ -29,9 +29,9 @@ module Sequence2D =
     /// <returns>
     /// Width and height from the provided sequence of sequences.
     /// </returns>
-    let sizeOfJagged seqs =
-        let height = Seq.length seqs
-        let width = seqs |> Seq.map Seq.length |> Seq.max
+    let sizeOfJagged sequences =
+        let height = Seq.length sequences
+        let width = sequences |> Seq.map Seq.length |> Seq.max
         Dimensions2D (width, height)
     
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿(*
  * SokobanFS - A Sokoban clone.
- * Copyright (C) 2018  Simon Wendel
+ * Copyright (C) 2018-2021  Simon Wendel
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyDescription("Tests the non game-specific functions.")>]
 
 [<assembly: AssemblyProduct("SokobanFS")>]
-[<assembly: AssemblyCopyright("Copyright © Simon Wendel 2018")>]
+[<assembly: AssemblyCopyright("Copyright © Simon Wendel 2018-2021")>]
 
 [<assembly: ComVisible(false)>]
 [<assembly: Guid("93400260-676f-4afb-81b4-cb33cff9798b")>]

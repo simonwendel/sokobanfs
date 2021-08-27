@@ -23,7 +23,7 @@ module Sequence2D =
     open Sequence2DTypes
 
     /// <summary>
-    /// Calculates dimensions of the smallest possible 2D array that could hold the 
+    /// Calculates dimensions of the smallest possible 2D array that could hold the
     /// jagged sequence of sequences.
     /// </summary>
     /// <returns>
@@ -31,9 +31,12 @@ module Sequence2D =
     /// </returns>
     let sizeOfJagged sequences =
         let height = Seq.length sequences
-        let width = sequences |> Seq.map Seq.length |> Seq.max
-        Dimensions2D (width, height)
-    
+
+        let width =
+            sequences |> Seq.map Seq.length |> Seq.max
+
+        Dimensions2D(width, height)
+
     /// <summary>
     /// Converts a jagged sequence of sequences into Array2D.
     /// </summary>
@@ -42,11 +45,11 @@ module Sequence2D =
     /// <return>
     /// Array2D initialized from provided sequence of sequences, possibly padded.
     /// </return>
-    let toArray2D padding jagged = 
+    let toArray2D padding jagged =
         let (Dimensions2D (cols, rows)) = sizeOfJagged jagged
         let array = Array2D.create rows cols padding
 
-        jagged |> Seq.iteri (fun rowNum row -> 
-            Seq.iteri (fun colNum value -> array.[rowNum, colNum] <- value) row)
+        jagged
+        |> Seq.iteri (fun rowNum row -> Seq.iteri (fun colNum value -> array.[rowNum, colNum] <- value) row)
 
         array

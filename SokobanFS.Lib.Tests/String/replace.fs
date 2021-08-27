@@ -27,7 +27,6 @@ module replace =
 
     [<Fact>]
     let ``Given string, character and replacement, replaces character with replacement`` () =
-
         let input = "string+with+some+separation+by+chars"
 
         let expected = "string-with-some-separation-by-chars"

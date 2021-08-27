@@ -23,9 +23,7 @@ module Sequence =
     module private HigherOrder =
 
         let trimReplace mapFoldFn revFn =
-
             fun value replacement seq ->
-
                 let folder shouldContinue element =
                     if shouldContinue && element = value then
                         (replacement, true)

@@ -28,7 +28,6 @@ module toArray2D =
 
     [<Fact>]
     let ``Given integer list list and padding element, returns Array2D representation`` () =
-
         let jaggedCollectionOfInts =
             [ [ 1; 2; 3 ]
               [ 1; 2 ]
@@ -49,7 +48,6 @@ module toArray2D =
 
     [<Fact>]
     let ``Given string array array and padding element, returns Array2D representation`` () =
-
         let jaggedCollectionOfStrings =
             [| [| "1"; "2"; "3"; "4" |]
                [| "1"; "2"; "3"; "4"; "5" |]

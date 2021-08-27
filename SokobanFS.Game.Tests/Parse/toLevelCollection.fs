@@ -30,7 +30,6 @@ module toLevelCollection =
 
     [<Fact>]
     let ``Given known level format, produces valid LevelCollection`` () =
-
         let text =
             [ "  ####"
               "###  ####"

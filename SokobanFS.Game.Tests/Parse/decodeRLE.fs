@@ -28,7 +28,6 @@ module decodeRLE =
 
     [<Fact>]
     let ``Given RLE encoded level, produces valid Level`` () =
-
         let input = "3#|#.3#|#*$-#|#--@#|5#"
 
         let expectation =
@@ -45,7 +44,6 @@ module decodeRLE =
 
     [<Fact>]
     let ``Given two consecutive characters of same type, outputs same typed squares`` () =
-
         let input = "##"
 
         let expectation = Level <| array2D [ [ Wall; Wall ] ]
@@ -56,7 +54,6 @@ module decodeRLE =
 
     [<Fact>]
     let ``Given two RLE encoded characters of same type, outputs same typed squares`` () =
-
         let input = "2#"
 
         let expectation = Level <| array2D [ [ Wall; Wall ] ]
@@ -67,7 +64,6 @@ module decodeRLE =
 
     [<Fact>]
     let ``Given 12300 space characters, outputs 12300 floor squares`` () =
-
         let input = "#12300-#"
 
         let expectation =
@@ -80,7 +76,6 @@ module decodeRLE =
 
     [<Fact>]
     let ``Given number without following square character, throws exception`` () =
-
         let input = "$$|#100"
 
         (fun () -> input |> Parse.decodeRLE |> ignore)

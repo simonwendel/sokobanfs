@@ -48,7 +48,6 @@ module Parse =
         Map.ofList ((Empty, ' ') :: (List.map Tuple.swap mappings))
 
     let private toSquare character =
-
         match squareLookup.TryFind character with
         | Some square -> square
         | None -> raise (InvalidFormatException "Invalid format")
@@ -78,7 +77,6 @@ module Parse =
     /// Converting string sequences (rows) into Level data, using common
     /// Sokoban text level format.
     let internal toLevel rows =
-
         let cleanColumnsTopAndBottom arr =
             for colNum = 0 to Array2D.length2 arr - 1 do
                 arr.[*, colNum]
@@ -102,7 +100,6 @@ module Parse =
     ///
     /// Decoding a level from a run-length encoded string into Level data.
     let internal decodeRLE (input: string) =
-
         let toCharListList = (List.ofArray >> List.map List.ofSeq)
 
         let rec joinNumbers list =
@@ -135,7 +132,6 @@ module Parse =
     ///
     /// Encoding Level data into a string, using a Sokoban-specific run-length encoding.
     let internal encodeRLE level =
-
         let rec insertOnes list =
             match list with
             | [] -> []

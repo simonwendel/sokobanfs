@@ -30,26 +30,22 @@ module swap =
 
     [<Property>]
     let ``Given int*string tuple, will swap first and second value `` (first: int, second: string) =
-
         always
         ==> ((first, second) |> Tuple.swap = (second, first))
 
     [<Property>]
     let ``Given string*string tuple, will swap first and second value `` (first: string, second: string) =
-
         always
         ==> ((first, second) |> Tuple.swap = (second, first))
 
 
     [<Property>]
     let ``Given float*char tuple, fst not NaN, will swap first and second value `` (first: NormalFloat, second: char) =
-
         always
         ==> ((first, second) |> Tuple.swap = (second, first))
 
     [<Property>]
     let ``Given float*int tuple, fst = NaN, will swap first and second value `` (second: int) =
-
         let first = nan
 
         let nanIsSwapped swapped =
@@ -61,7 +57,6 @@ module swap =
 
     [<Property>]
     let ``Given float*string tuple, fst = NaN, will swap first and second value `` (second: string) =
-
         let first = infinity
 
         let infinityIsSwapped swapped =

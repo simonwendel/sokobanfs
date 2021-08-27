@@ -29,7 +29,6 @@ module sizeOfJagged =
 
     [<Fact>]
     let ``Given integer list list, computes min 2D array size that would hold the jagged collection`` () =
-
         let jaggedCollectionOfInts =
             [ [ 1; 2; 3 ]
               [ 1; 2 ]
@@ -43,7 +42,6 @@ module sizeOfJagged =
 
     [<Fact>]
     let ``Given string array array, computes min 2D array size that would hold the jagged collection`` () =
-
         let jaggedCollectionOfStrings =
             [| [| "1"; "2"; "3"; "4" |]
                [| "1"; "2"; "3"; "4"; "5" |]

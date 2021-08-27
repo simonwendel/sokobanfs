@@ -28,7 +28,6 @@ module encodeRLE =
 
     [<Fact>]
     let ``Given Level, produces RLE encoded level string`` () =
-
         let input =
             Level
             <| array2D [ [ Wall; Wall; Wall; Empty; Empty ]
@@ -45,7 +44,6 @@ module encodeRLE =
 
     [<Fact>]
     let ``Given two consecutive Squares of same type, outputs same typed characters`` () =
-
         let input = Level <| array2D [ [ Wall; Wall ] ]
 
         let expectation = "##"
@@ -56,7 +54,6 @@ module encodeRLE =
 
     [<Fact>]
     let ``Given 1230 Floor squares, produces 1230 space characters`` () =
-
         let input =
             Parse.toLevel
             <| [ String.concat "" [ "#"; String.replicate 1230 " "; "#" ] ]

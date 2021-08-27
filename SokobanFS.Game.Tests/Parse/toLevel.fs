@@ -31,7 +31,6 @@ module toLevel =
 
     [<Fact>]
     let ``Given known level format, produces valid Level`` () =
-
         let input =
             [ "  ####"
               "###  ####"
@@ -54,17 +53,12 @@ module toLevel =
 
     [<Fact>]
     let ``Given extra spaces on the right, trims them off`` () =
-
         let input = [ "#       "; "*       " ]
-
-        let expectation =
-            Level <| array2D [ [ Wall ]; [ BoxOnGoal ] ]
-
+        let expectation = Level <| array2D [ [ Wall ]; [ BoxOnGoal ] ]
         input |> Parse.toLevel |> should equal expectation
 
     [<Fact>]
     let ``Given extra spaces on the left, cleans them up with empty squares`` () =
-
         let input = [ "  #"; "  *" ]
 
         let expectation =
@@ -76,7 +70,6 @@ module toLevel =
 
     [<Fact>]
     let ``Given extra spaces on the top, cleans them up with empty squares`` () =
-
         let input = [ "* *"; "###" ]
 
         let expectation =
@@ -88,7 +81,6 @@ module toLevel =
 
     [<Fact>]
     let ``Given extra spaces on the bottom, cleans them up with empty squares`` () =
-
         let input = [ "###"; "* *" ]
 
         let expectation =
@@ -100,7 +92,6 @@ module toLevel =
 
     [<Fact>]
     let ``Converting known level format character produces corresponding square`` () =
-
         // all known mappings, except for the Space -> (Floor or Empty)
         // that is implicitly handled in the other tests
         let knownMappings =
@@ -120,7 +111,6 @@ module toLevel =
 
     [<Property>]
     let ``Converting unknown level format character, throws InvalidFormat exception`` (character: char) =
-
         let validSquareCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 
         let input = character.ToString()

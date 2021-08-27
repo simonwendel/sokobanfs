@@ -27,7 +27,6 @@ module splitOn =
 
     [<Fact>]
     let ``Given string and separator, splits string around separator`` () =
-
         let input = "string with some separation by spaces"
 
         let expected =

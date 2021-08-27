@@ -45,7 +45,7 @@ module Parse =
     let private squareLookup = Map.ofList mappings
 
     let private characterLookup =
-        Map.ofList ((Empty, ' ') :: (List.map Tuple.swap mappings))
+        Map.ofList (List.map Tuple.swap ((' ', Empty) :: mappings))
 
     let private toSquare character =
         match squareLookup.TryFind character with

@@ -20,10 +20,10 @@ namespace SokobanFS.Lib
 
 module String =
 
-    let fromSeq seq =
-        seq
-        |> Seq.map (fun el -> el.ToString())
-        |> Seq.reduce (+)
+    let fromSeq sequence =
+        sequence
+        |> Seq.map string
+        |> String.concat ""
 
     let splitOn (separator: char) (str: string) = str.Split(separator)
 

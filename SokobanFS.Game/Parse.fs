@@ -42,7 +42,7 @@ module Parse =
           '.', Goal
           ' ', Floor ]
 
-    let private squareLookup = mappings |> Map.ofList
+    let private squareLookup = Map.ofList mappings
 
     let private characterLookup =
         Map.ofList ((Empty, ' ') :: (List.map Tuple.swap mappings))

@@ -65,8 +65,8 @@ module Parse =
             List.ofArray array.[0, *]
             :: toArrayList array.[1.., *]
 
-    let rec private qualifyCharacters list =
-        match list with
+    let rec private qualifyCharacters =
+        function
         | [] -> []
         | head :: tail ->
             match Int32.TryParse(head.ToString()) with
@@ -102,14 +102,14 @@ module Parse =
     let internal decodeRLE (input: string) =
         let toCharListList = (List.ofArray >> List.map List.ofSeq)
 
-        let rec joinNumbers list =
-            match list with
+        let rec joinNumbers =
+            function
             | [] -> []
             | Number (major) :: Number (minor) :: tail -> joinNumbers (Number(10 * major + minor) :: tail)
             | otherToken :: tail -> otherToken :: joinNumbers tail
 
-        let rec expandCharacters list =
-            match list with
+        let rec expandCharacters =
+            function
             | [] -> [ "" ]
             | Number (numberOfTimes) :: Character (character) :: tail ->
                 (String.replicate numberOfTimes (character.ToString()))
@@ -131,14 +131,14 @@ module Parse =
 
     ///
     /// Encoding Level data into a string, using a Sokoban-specific run-length encoding.
-    let internal encodeRLE level =
-        let rec insertOnes list =
-            match list with
+    let internal encodeRLE =
+        let rec insertOnes =
+            function
             | [] -> []
             | head :: tail -> Number(1) :: head :: insertOnes tail
 
-        let rec countRepetitions list =
-            match list with
+        let rec countRepetitions =
+            function
             | [] -> []
             | Number (n1) :: Character (c1) :: Number (n2) :: Character (c2) :: tail ->
                 if c1 = c2 then
@@ -150,8 +150,8 @@ module Parse =
                        :: countRepetitions (Number(n2) :: Character(c2) :: tail)
             | q :: tail -> q :: countRepetitions tail
 
-        let rec stringifyTokens list =
-            match list with
+        let rec stringifyTokens =
+            function
             | [] -> []
             | Number (n) :: Character (c) :: tail ->
                 let character = c.ToString()
@@ -163,7 +163,7 @@ module Parse =
                     number :: character :: stringifyTokens tail
             | illegal -> raise (InvalidFormatException(illegal.ToString()))
 
-        match level with
+        function
         | Level level ->
             level
             |> Array2D.map toChar

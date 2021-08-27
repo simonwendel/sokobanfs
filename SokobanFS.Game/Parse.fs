@@ -69,7 +69,7 @@ module Parse =
         function
         | [] -> []
         | head :: tail ->
-            match Int32.TryParse(head.ToString()) with
+            match Int32.TryParse(string head) with
             | (true, num) -> Number(num) :: qualifyCharacters tail
             | (false, _) -> Character(head) :: qualifyCharacters tail
 
@@ -112,10 +112,10 @@ module Parse =
             function
             | [] -> [ "" ]
             | Number (numberOfTimes) :: Character (character) :: tail ->
-                (String.replicate numberOfTimes (character.ToString()))
+                (String.replicate numberOfTimes (string character))
                 :: expandCharacters tail
-            | Character (character) :: tail -> character.ToString() :: expandCharacters tail
-            | illegal -> raise (InvalidFormatException(illegal.ToString()))
+            | Character (character) :: tail -> string character :: expandCharacters tail
+            | illegal -> raise (InvalidFormatException(string illegal))
 
         input
         |> replace '-' ' '
@@ -154,14 +154,14 @@ module Parse =
             function
             | [] -> []
             | Number (n) :: Character (c) :: tail ->
-                let character = c.ToString()
-                let number = if n = 1 then "" else n.ToString()
+                let character = string c
+                let number = if n = 1 then "" else string n
 
                 if (n = 2) then
                     character :: character :: stringifyTokens tail
                 else
                     number :: character :: stringifyTokens tail
-            | illegal -> raise (InvalidFormatException(illegal.ToString()))
+            | illegal -> raise (InvalidFormatException(string illegal))
 
         function
         | Level level ->

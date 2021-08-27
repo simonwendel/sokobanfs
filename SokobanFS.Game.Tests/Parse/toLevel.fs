@@ -113,7 +113,7 @@ module toLevel =
     let ``Converting unknown level format character, throws InvalidFormat exception`` (character: char) =
         let validSquareCharacters = [ "#"; "@"; "+"; "$"; "*"; "."; " " ]
 
-        let input = character.ToString()
+        let input = string character
 
         not (validSquareCharacters |> List.contains input)
         ==> lazy

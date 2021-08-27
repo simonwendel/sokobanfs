@@ -49,7 +49,8 @@ module Sequence2D =
         let (Dimensions2D (cols, rows)) = sizeOfJagged jagged
         let array = Array2D.create rows cols padding
 
-        jagged
-        |> Seq.iteri (fun rowNum row -> Seq.iteri (fun colNum value -> array.[rowNum, colNum] <- value) row)
+        let updateCell row col value = array.[row, col] <- value
+        let eachRow = updateCell >> Seq.iteri
+        Seq.iteri eachRow jagged
 
         array

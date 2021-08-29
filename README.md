@@ -4,4 +4,4 @@
 
 | Branch | Status |
 |--------|--------|
-| [master](/simonwendel/sokobanfs/tree/master) | [![Build status](https://ci.appveyor.com/api/projects/status/m3ij0hfc4ly8ifc0/branch/master?svg=true)](https://ci.appveyor.com/project/simonwendel/sokobanfs/branch/master) |
+| [master](/simonwendel/sokobanfs/tree/master) | [![Build Status](https://dev.azure.com/simonwendel-public/builds/_apis/build/status/simonwendel.sokobanfs?branchName=master)](https://dev.azure.com/simonwendel-public/builds/_build/latest?definitionId=8&branchName=master)|

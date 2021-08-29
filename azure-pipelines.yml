@@ -1,4 +1,4 @@
-name: '$(BuildDefinitionName)_r$(Rev:.r)'
+name: '$(BuildDefinitionName)_r$(Rev:r)'
 
 trigger:
 - '*'
@@ -7,9 +7,9 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  buildProjects: '**/*.csproj'
+  buildProjects: '**/*.fsproj'
   buildConfiguration: 'Release'
-  testProjects: '**/*[Tt]ests/*.csproj'
+  testProjects: '**/*[Tt]ests/*.fsproj'
 
 steps:
 - task: DotNetCoreCLI@2

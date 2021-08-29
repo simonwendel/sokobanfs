@@ -1,0 +1,46 @@
+name: '$(BuildDefinitionName)_r$(Rev:.r)'
+
+trigger:
+- '*'
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildProjects: '**/*.csproj'
+  buildConfiguration: 'Release'
+  testProjects: '**/*[Tt]ests/*.csproj'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '$(buildProjects)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '$(buildProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(testProjects)'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: CopyFiles@2
+  displayName: Copy
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**\bin\$(BuildConfiguration)\**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish
+  inputs:
+    ArtifactName: 'drop'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed() 
